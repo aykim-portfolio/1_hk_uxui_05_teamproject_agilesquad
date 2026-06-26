@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"C:\\\\Users\\\\alstj\\\\agile\" branch -a)",
+      "Bash(git -C \"C:\\\\Users\\\\alstj\\\\agile\" checkout design-문서-통합)",
+      "Bash(git -C \"C:\\\\Users\\\\alstj\\\\agile\" diff --name-only --diff-filter=A main...design-문서-통합)",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget",
+      "Bash(git -C \"C:\\\\Users\\\\alstj\\\\agile\" status)",
+      "Bash(git -C \"C:\\\\Users\\\\alstj\\\\agile\" log --oneline -5)",
+      "Bash(git -C \"C:\\\\Users\\\\alstj\\\\agile\" add slide_test.html)",
+      "Bash(git -C 'C:\\\\Users\\\\alstj\\\\agile' commit -m ' *)",
+      "Bash(git -C \"C:\\\\Users\\\\alstj\\\\agile\" push origin design-문서-통합)",
+      "Bash(gh pr create --base main --head design-문서-통합 --title 'feat: 발표용 테스트 슬라이드 HTML 추가' --body ' *)"
+    ]
+  }
+}

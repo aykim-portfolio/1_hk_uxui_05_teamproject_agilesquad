@@ -1,6 +1,7 @@
 # Egile slide 디자인 시스템 — Design.md
 
 > 장표(프레젠테이션) 디자인 전용 디자인 시스템
+> 작성자 : 김민성 DesignOPS
 
 한경(한국경제)은 종이신문 기반의 높은 신뢰도와 전문성을 보유하고 있지만, 이 자산이 디지털 채널(랜딩페이지·모바일 앱)에 충분히 녹아들지 못하고 있다. 현재 문서는 이를 개선하기 위한 AIS 프로젝트의 발표용 slide 디자인 결과물을 위한 design.md 문서이다.  
 
@@ -20,7 +21,6 @@
 ## 1. 컬러 시스템
 
 ### 구조 원칙
-
 
 - **Primitive Colors**: 절대 직접 사용 금지. Semantic Token을 통해서만 참조
 - **Semantic Tokens**: 컴포넌트와 슬라이드에 항상 이 레이어를 사용
@@ -143,59 +143,59 @@
 
 #### Background
 
-| Token | Primitive | 값 | 사용처 |
-|---|---|---|---|
-| background/surface | neutral/white | #ffffff | 카드, 패널, 모달 배경 |
-| background/subtle | neutral/neutral10 | #f9fafb | 페이지 배경, 섹션 배경 |
-| background/muted | neutral/neutral20 | #f2f4f6 | 테이블 헤더, 구분 배경 |
-| background/brand | primary/blue10 | #e8f3ff | 브랜드 강조 배경, Kicker 배경 |
-| background/secondary | secondary/indigo10 | #eef2ff | 인디고 계열 강조 배경 |
+| Token | Primitive | 사용처 |
+|---|---|---|
+| background/surface | neutral/white | 카드, 패널, 모달 배경 |
+| background/subtle | neutral/neutral10 | 페이지 배경, 섹션 배경 |
+| background/muted | neutral/neutral20 | 테이블 헤더, 구분 배경 |
+| background/brand | primary/blue10 | 브랜드 강조 배경, Kicker 배경 |
+| background/secondary | secondary/indigo10 | 인디고 계열 강조 배경 |
 
 #### Text
 
-| Token | Primitive | 값 | 사용처 |
-|---|---|---|---|
-| text/primary | neutral/neutral100 | #191f28 | 기본 텍스트 (제목, 본문) |
-| text/secondary | neutral/neutral80 | #4e5968 | 보조 텍스트 |
-| text/tertiary | neutral/neutral60 | #8b95a1 | 힌트, 메타 정보 |
-| text/disabled | neutral/neutral50 | #9ca3af | 비활성 상태 |
-| text/inverse | neutral/white | #ffffff | 다크 배경 위 텍스트 |
-| text/brand | primary/blue60 | #3182f6 | 브랜드 컬러 텍스트, 링크 |
-| text/link | secondary/indigo60 | #6366f1 | 인터랙티브 링크 |
+| Token | Primitive | 사용처 |
+|---|---|---|
+| text/primary | neutral/neutral100 | 기본 텍스트 (제목, 본문) |
+| text/secondary | neutral/neutral80 | 보조 텍스트 |
+| text/tertiary | neutral/neutral60 | 힌트, 메타 정보 |
+| text/disabled | neutral/neutral50 | 비활성 상태 |
+| text/inverse | neutral/white | 다크 배경 위 텍스트 |
+| text/brand | primary/blue60 | 브랜드 컬러 텍스트, 링크 |
+| text/link | secondary/indigo60 | 인터랙티브 링크 |
 
 #### Border
 
-| Token | Primitive | 값 | 사용처 |
-|---|---|---|---|
-| border/default | neutral/neutral30 | #e5e8eb | 기본 경계선, 구분선 |
-| border/hover | neutral/neutral40 | #d1d5db | 호버 상태 경계선 |
-| border/brand | primary/blue60 | #3182f6 | 포커스, 선택 상태 |
-| border/error | semantic/error60 | #ef4444 | 에러 상태 입력 경계선 |
+| Token | Primitive | 사용처 |
+|---|---|---|
+| border/default | neutral/neutral30 | 기본 경계선, 구분선 |
+| border/hover | neutral/neutral40 | 호버 상태 경계선 |
+| border/brand | primary/blue60 | 포커스, 선택 상태 |
+| border/error | semantic/error60 | 에러 상태 입력 경계선 |
 
 #### Brand
 
-| Token | Primitive | 값 | 사용처 |
-|---|---|---|---|
-| brand/primary | primary/blue60 | #3182f6 | 주요 CTA 버튼, 활성 상태 |
-| brand/primary-hover | primary/blue70 | #2163d2 | CTA 버튼 hover |
-| brand/primary-subtle | primary/blue10 | #e8f3ff | 브랜드 배경 강조 |
-| brand/secondary | secondary/indigo60 | #6366f1 | 세컨더리 강조, 슬라이드 포인트 |
-| brand/secondary-hover | secondary/indigo70 | #4f46e5 | 세컨더리 hover |
-| brand/tertiary | tertiary/teal70 | #10b981 | 긍정 지표, 성장률 강조 |
-| brand/tertiary-hover | tertiary/teal80 | #059669 | 터셔리 hover |
+| Token | Primitive | 사용처 |
+|---|---|---|
+| brand/primary | primary/blue60 | 주요 CTA 버튼, 활성 상태 |
+| brand/primary-hover | primary/blue70 | CTA 버튼 hover |
+| brand/primary-subtle | primary/blue10 | 브랜드 배경 강조 |
+| brand/secondary | secondary/indigo60 | 세컨더리 강조, 슬라이드 포인트 |
+| brand/secondary-hover | secondary/indigo70 | 세컨더리 hover |
+| brand/tertiary | tertiary/teal70 | 긍정 지표, 성장률 강조 |
+| brand/tertiary-hover | tertiary/teal80 | 터셔리 hover |
 
 #### Status
 
-| Token | Primitive | 값 | 사용처 |
-|---|---|---|---|
-| status/error | semantic/error60 | #ef4444 | 오류, 감소 지표 |
-| status/error-bg | semantic/error10 | #fff1f2 | 오류 상태 배경 |
-| status/warning | semantic/warning60 | #f59e0b | 경고, 주의 상태 |
-| status/warning-bg | semantic/warning10 | #fffbeb | 경고 배경 |
-| status/success | semantic/success70 | #16a34a | 성공, 달성, 긍정 |
-| status/success-bg | semantic/success10 | #f0fdf4 | 성공 배경 |
-| status/info | primary/blue60 | #3182f6 | 정보, 진행 중 |
-| status/info-bg | primary/blue10 | #e8f3ff | 정보 배경 |
+| Token | Primitive | 사용처 |
+|---|---|---|
+| status/error | semantic/error60 | 오류, 감소 지표 |
+| status/error-bg | semantic/error10 | 오류 상태 배경 |
+| status/warning | semantic/warning60 | 경고, 주의 상태 |
+| status/warning-bg | semantic/warning10 | 경고 배경 |
+| status/success | semantic/success70 | 성공, 달성, 긍정 |
+| status/success-bg | semantic/success10 | 성공 배경 |
+| status/info | primary/blue60 | 정보, 진행 중 |
+| status/info-bg | primary/blue10 | 정보 배경 |
 
 ---
 
@@ -208,9 +208,7 @@
 | Primary | Pretendard | Display, Heading, Body 전체 |
 | Data | Inter | KPI 수치, 데이터 레이블 |
 | Caption | Noto Sans KR | 소형 캡션, 뱃지 텍스트 |
-
-### 계층 구조
-
+| Code | JetBrains Mono | SQL 쿼리, 코드 블록, 인라인 코드 |
 
 ### Display
 
@@ -266,6 +264,15 @@
 | Data/Label-M | Inter Medium | 13px | 140% | 테이블 헤더, 차트 범례 레이블 |
 | Data/Label-S | Inter Medium | 12px | 140% | 차트 축 레이블, 수치 단위 |
 | Data/Label-XS | Inter Regular | 11px | 140% | 툴팁, 데이터 포인트 레이블 |
+
+### Code (JetBrains Mono — SQL·코드 전용)
+
+| 스타일명 | 폰트 | 크기 | 행간 | 사용처 |
+|---|---|---|---|---|
+| Code/Block-Regular | JetBrains Mono Regular | 13px | 160% | 코드 블록 본문, SQL 쿼리 |
+| Code/Block-Bold | JetBrains Mono Bold | 13px | 160% | 키워드·예약어 강조 (SELECT, FROM 등) |
+| Code/Inline | JetBrains Mono Regular | 13px | — | 본문 내 인라인 코드 스팬 |
+| Code/Label | JetBrains Mono Regular | 11px | 140% | 언어 레이블 배지 (SQL, JS, Python 등) |
 
 ---
 
@@ -351,11 +358,10 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 슬라이드 최상단 고정 헤더. 모든 장표에 공통 적용하나 표지 제외.
 
 - 크기: 1280 × 100px
-- 배경: secondary/indigo100 (#312e81)
+- 배경: secondary/indigo100
 - Kicker 텍스트: Caption/S-Bold + secondary/indigo40
 - 제목 텍스트: Heading/M + text/inverse
 - 아이콘: 우측 고정 24×24px
-
 
 ---
 
@@ -369,7 +375,6 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 - 본문: Body/S-Regular + text/inverse (다크) / text/primary (라이트)
 - Elevation: Elevation/2 · Card
 - Radius: radius/lg
-
 
 ---
 
@@ -386,7 +391,6 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 - 설명: Body/S-Regular + text/secondary
 - 태그: radius/full, background/brand + text/brand
 - Padding: spacing/24 / Gap: spacing/12
-
 
 ---
 
@@ -405,7 +409,6 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 - 구분선: border/default
 - 불릿: Caption/M-Regular + text/secondary
 - Padding: spacing/20
-
 
 ---
 
@@ -427,7 +430,28 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 
 ---
 
-### 7.6 기타 컴포넌트
+### 7.6 code-block
+
+SQL 쿼리·코드 스니펫 표시 패널. 보고서·분석 슬라이드에 사용.
+
+- 배경 (다크): `neutral/neutral100`
+- 배경 (라이트): `background/muted`
+- 언어 레이블: `Code/Label` + `text/tertiary`, 좌상단 고정
+- 본문: `Code/Block-Regular` + `text/inverse` (다크) / `text/primary` (라이트)
+- 키워드 강조: `Code/Block-Bold` + `secondary/indigo40` — 다크 배경 전용 허용
+- Radius: `radius/md` (8px)
+- Padding: `spacing/16`
+- Elevation: `Elevation/1 · Raised`
+
+**인라인 코드 스팬**
+- 배경: `background/muted`
+- 텍스트: `Code/Inline` + `text/primary`
+- Radius: `radius/xs` (2px)
+- Padding: `spacing/2` (상하) · `spacing/4` (좌우)
+
+---
+
+### 7.7 기타 컴포넌트
 
 | 컴포넌트명 | ID | 크기 | 설명 |
 |---|---|---|---|
@@ -437,14 +461,17 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 | icon/smile | 76:220 | 24×24px | 미소 아이콘 |
 | icon/megaphone-off | 76:219 | 24×24px | 알림 끄기 아이콘 |
 | icon/shield-alert | 76:218 | 24×24px | 보안 경고 아이콘 |
-| status/success chip | 76:227 | 39×20px | 성공 상태 인라인 칩 |
-| status/warning chip | 76:231 | 39×20px | 경고 상태 인라인 칩 |
-| status/info chip | 76:233 | 39×20px | 정보 상태 인라인 칩 |
-| status/error chip | 76:237 | 39×20px | 오류 상태 인라인 칩 |
+| status/success chip | 76:227 | 39×23px | 성공 상태 인라인 칩 |
+| status/warning chip | 76:231 | 39×23px | 경고 상태 인라인 칩 |
+| status/info chip | 76:233 | 39×23px | 정보 상태 인라인 칩 |
+| status/error chip | 76:237 | 39×23px | 오류 상태 인라인 칩 |
+| badge/general | 83:378 | 43×31px | 일반 중립 뱃지 (neutral beige) |
+| badge/sub | 83:380 | 43×31px | 보조 뱃지 (muted gray) |
 | viewpoint list (Default) | 76:257 | 432×92px | 리스트형 관점 카드 |
 | viewpoint list (Variant2) | 80:304 | 432×86px | 리스트형 관점 카드 변형 |
 | content block (Default) | 83:363 | 568×135px | 콘텐츠 블록 |
 | content block (Variant2) | 83:365 | 568×135px | 콘텐츠 블록 변형 |
+| radar-chart | 12:4 | 420×626px | 헥사곤 레이더 차트 + 지표 progress bar — 활동 역량 분석 슬라이드 전용 |
 
 ---
 
@@ -455,7 +482,7 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 1. 컴포넌트에는 반드시 Semantic Token 사용 — `brand/primary`, `text/primary` 등
 2. Primitive는 직접 사용 금지 — 팔레트 문서 표시 용도로만 존재
 3. 예외 허용 — 다크 슬라이드 배경에만 `secondary/indigo100`, `indigo30/40/50` 직접 사용 가능
-4. Light 배경 기본값 — `background/surface` (#ffffff), 강조 섹션은 `background/subtle`
+4. Light 배경 기본값 — `background/surface`, 강조 섹션은 `background/subtle`
 
 ### 타이포그래피 원칙
 
@@ -463,6 +490,7 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 - 숫자·수치 = `Data/` 계열 (Inter) — 한글과 혼용 금지
 - 한국어 본문 행간 = 160% — 가독성 필수 기준
 - 캡션 최소 크기 = 10px — 이하 사용 금지
+- SQL·코드 = `Code/` 계열 (JetBrains Mono) — 일반 본문 폰트 혼용 금지
 
 ### 컴포넌트 원칙
 

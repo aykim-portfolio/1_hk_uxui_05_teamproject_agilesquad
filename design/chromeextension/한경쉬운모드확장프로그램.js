@@ -15,7 +15,7 @@
   const DEFAULT_LEFT = 24;
 
   const btn = document.createElement('button');
-  btn.innerText = 'ON';
+  btn.innerText = 'AIS';
   btn.style.cssText = `
     position: fixed;
     bottom: 24px;

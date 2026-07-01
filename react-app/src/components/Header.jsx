@@ -42,11 +42,14 @@ export default function Header({ onSubOpen, isPremium }) {
       </div>
 
       <nav className="hk-nav">
-        {!isPremium && (
-          <button className="hk-trial-btn" onClick={onSubOpen}>
-            <i className="ti ti-sparkles" aria-hidden="true" style={{ fontSize: 13 }}></i>유료 구독 체험하기
-          </button>
-        )}
+        <button
+          className={'hk-trial-btn' + (isPremium ? ' hk-trial-btn--hidden' : '')}
+          onClick={onSubOpen}
+          aria-hidden={isPremium}
+          tabIndex={isPremium ? -1 : 0}
+        >
+          <i className="ti ti-sparkles" aria-hidden="true" style={{ fontSize: 13 }}></i>유료 구독 체험하기
+        </button>
         <div className="hk-nav-menu">
           {navItems.map((item) => (
             <a key={item} className={'hk-nav-item' + (item === '사회' ? ' active' : '')}>

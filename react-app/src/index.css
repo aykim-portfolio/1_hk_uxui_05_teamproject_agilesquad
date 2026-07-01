@@ -122,6 +122,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
   white-space: nowrap;
 }
 .hk-trial-btn:hover { background: #0e2856; }
+.hk-trial-btn--hidden { visibility: hidden; pointer-events: none; }
 .hk-nav-menu { display: flex; align-items: center; gap: 22px; flex: 1; }
 .hk-nav-item { font-size: 15px; color: #333; cursor: pointer; text-decoration: none; white-space: nowrap; }
 .hk-nav-item.active { font-weight: 700; color: #191f28; }
@@ -149,10 +150,24 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .hk-tick-fx { margin-left: auto; padding-left: 22px; border-left: 1px solid #e5e8eb; }
 
 /* ══════════════ 본문 레이아웃 ══════════════ */
-.page { display: grid; grid-template-columns: 96px minmax(0,1fr) 380px; max-width: 1320px; margin: 0 auto; gap: 0; background: #fff; }
+.page {
+  display: grid;
+  grid-template-columns: 180px 620px 300px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "support header header"
+    "support body   aside";
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 0;
+  background: #fff;
+}
+
+/* 기사 제목/바이라인 — article 본문 + aside 상단을 모두 가로지르는 헤더 */
+.art-header { grid-area: header; padding: 36px 44px 0; }
 
 /* 기사 */
-.art-main { padding: 36px 44px 48px; border-right: 1px solid #e5e8eb; min-width: 0; }
+.art-main { grid-area: body; padding: 24px 44px 48px; border-right: 1px solid #e5e8eb; min-width: 0; }
 .art-title { font-size: 32px; font-weight: 800; color: #191f28; line-height: 1.35; margin-bottom: 18px; letter-spacing: -0.01em; }
 .art-byline { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #e5e8eb; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
 .art-byline-left { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #4e5968; flex-wrap: wrap; }
@@ -178,7 +193,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .art-hl:hover { background: #fde68a; }
 
 /* ── 세로 읽기 레벨 슬라이더 (원문/쉬운말/쉽게읽기) — article-support ── */
-.article-support { padding: 28px 0; }
+.article-support { grid-area: support; padding: 28px 0; }
 .rlv { position: sticky; top: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; background: #ffffff; border: 1px solid #e5e8eb; border-radius: 24px; padding: 18px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
 .rlv-cap { font-size: 11px; color: #4e5968; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 3px; margin-bottom: 2px; }
 .rlv-cap i { color: #143c7e; font-size: 16px; }
@@ -254,10 +269,12 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .art-author-desc { font-size: 13px; color: #4e5968; line-height: 1.6; }
 
 /* ══════════════ Epic AI 사이드바 ══════════════ */
-.art-sidebar { padding: 28px 24px; background: #f9fafb; }
+.art-sidebar { grid-area: aside; padding: 28px 24px; background: #f9fafb; }
 .art-sidebar-sticky {
   position: sticky;
   top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
 }
 .panel-title { font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 0 0 4px; letter-spacing: -0.01em; }
 .panel-sub { font-size: 13px; color: var(--text-muted); margin: 0 0 20px; }
@@ -357,8 +374,17 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .sub-cta:disabled { background: #d1d5db; cursor: not-allowed; color: #9ca3af; }
 .sub-note { font-size: 10px; color: #9ca3af; text-align: center; line-height: 1.5; font-family: var(--font-caption); }
 .sub-disc-badge { font-size: 10px; background: #f0fdf4; color: #16a34a; border-radius: 9999px; padding: 2px 8px; font-weight: 700; margin-left: 6px; font-family: var(--font-caption); }
-.sub-new-member { background: #312e81; border-radius: 10px; padding: 12px 14px; margin-top: auto; }
-.sub-new-badge { display: inline-block; background: #818cf8; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 9999px; margin-bottom: 6px; font-family: var(--font-caption); }
+.sub-new-member { background: #312e81; border: 1.5px solid transparent; border-radius: 12px; padding: 14px; cursor: pointer; user-select: none; transition: border-color .15s, box-shadow .15s; box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+.sub-new-member:hover { border-color: #818cf8; }
+.sub-new-member.sel { border-color: #fff; box-shadow: 0 0 0 2px rgba(255,255,255,0.25), 0 2px 8px rgba(0,0,0,0.06); }
+.sub-new-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.sub-new-icon-group { display: flex; align-items: center; gap: 5px; }
+.sub-new-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: rgba(255,255,255,0.15); color: #fff; flex-shrink: 0; }
+.sub-new-check { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .15s; }
+.sub-new-member.sel .sub-new-check { background: #fff; border-color: #fff; }
+.sub-new-checkmark { display: none; color: #312e81; font-size: 11px; font-weight: 700; }
+.sub-new-member.sel .sub-new-checkmark { display: block; }
+.sub-new-badge { display: inline-block; width: fit-content; white-space: nowrap; background: #818cf8; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 9999px; font-family: var(--font-caption); }
 .sub-new-title { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 3px; }
 .sub-new-desc { font-size: 11px; color: #c7d2fe; line-height: 1.5; }
 .sub-confirm { display: none; position: absolute; inset: 0; background: rgba(0,0,0,0.38); align-items: center; justify-content: center; z-index: 10; border-radius: 24px; }

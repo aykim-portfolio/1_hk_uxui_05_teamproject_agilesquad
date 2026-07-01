@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from './components/Header';
 import ReadingLevelSlider from './components/ReadingLevelSlider';
+import ArticleHeader from './components/ArticleHeader';
 import Article from './components/Article';
 import Sidebar from './components/Sidebar';
 import SubscriptionModal from './components/SubscriptionModal';
@@ -19,6 +20,7 @@ export default function App() {
 
       <div className="page">
         <ReadingLevelSlider level={level} onChange={setLevel} />
+        <ArticleHeader level={level} />
         <Article level={level} onSubOpen={openSub} />
         <Sidebar onSubOpen={openSub} isPremium={isPremium} />
       </div>

@@ -20,7 +20,7 @@ export default function App() {
       <div className="page">
         <ReadingLevelSlider level={level} onChange={setLevel} />
         <Article level={level} onSubOpen={openSub} />
-        <Sidebar onSubOpen={openSub} />
+        <Sidebar onSubOpen={openSub} isPremium={isPremium} />
       </div>
 
       <SubscriptionModal

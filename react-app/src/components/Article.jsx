@@ -40,6 +40,12 @@ export default function Article({ level, onSubOpen }) {
 
       <p className="art-hero-cap">전국 지자체가 하반기부터 상하수도 요금을 줄줄이 인상한다. / 한국경제 자료사진</p>
 
+      <div
+        className="art-body hk-stat-scope"
+        ref={bodyRef}
+        dangerouslySetInnerHTML={{ __html: levels[level].body }}
+      />
+
       <figure className="art-figure">
         <img
           src="/water-rate-table.png"
@@ -48,12 +54,6 @@ export default function Article({ level, onSubOpen }) {
           loading="lazy"
         />
       </figure>
-
-      <div
-        className="art-body hk-stat-scope"
-        ref={bodyRef}
-        dangerouslySetInnerHTML={{ __html: levels[level].body }}
-      />
 
       {/* 쉬운 읽기 — 용어 설명 */}
       <div className="glossary">

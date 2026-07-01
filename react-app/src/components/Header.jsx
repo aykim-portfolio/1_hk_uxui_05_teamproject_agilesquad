@@ -11,7 +11,7 @@ const tickers = [
 
 const navItems = ['경제', '산업', '사회', '코리아마켓', '글로벌마켓', '집코노미', '국제', '유통', '오피니언'];
 
-export default function Header({ onSubOpen }) {
+export default function Header({ onSubOpen, isPremium }) {
   return (
     <>
       <div className="hk-utility">
@@ -42,9 +42,11 @@ export default function Header({ onSubOpen }) {
       </div>
 
       <nav className="hk-nav">
-        <button className="hk-trial-btn" onClick={onSubOpen}>
-          <i className="ti ti-sparkles" aria-hidden="true" style={{ fontSize: 13 }}></i>유료 구독 체험하기
-        </button>
+        {!isPremium && (
+          <button className="hk-trial-btn" onClick={onSubOpen}>
+            <i className="ti ti-sparkles" aria-hidden="true" style={{ fontSize: 13 }}></i>유료 구독 체험하기
+          </button>
+        )}
         <div className="hk-nav-menu">
           {navItems.map((item) => (
             <a key={item} className={'hk-nav-item' + (item === '사회' ? ' active' : '')}>

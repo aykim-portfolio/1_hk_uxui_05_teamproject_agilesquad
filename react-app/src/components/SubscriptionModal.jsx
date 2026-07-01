@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { products, discountRate, formatKRW } from '../data/products';
 
-export default function SubscriptionModal({ open, onClose }) {
+export default function SubscriptionModal({ open, onClose, onSubscribed }) {
   const [selected, setSelected] = useState(() => new Set());
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [success, setSuccess] = useState(null); // { orderId, dateStr, items, final, next }
@@ -43,6 +43,7 @@ export default function SubscriptionModal({ open, onClose }) {
   function handleReset() {
     setSelected(new Set());
     setSuccess(null);
+    onSubscribed?.();
     handleClose();
   }
 

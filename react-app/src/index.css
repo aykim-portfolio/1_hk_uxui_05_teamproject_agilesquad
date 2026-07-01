@@ -396,3 +396,26 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .sub-next-date i { color: #3182f6; font-size: 13px; }
 .sub-success-close { background: #3182f6; color: #fff; border: none; border-radius: 10px; padding: 12px 32px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: var(--font-sans); }
 .sub-success-close:hover { background: #2163d2; }
+
+/* OFF 버튼 (좌측 하단 고정) */
+.off-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 999;
+  display: flex;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 28px;
+  border: none;
+  background: radial-gradient(50% 50% at 50% 50%, #eef0f2 0%, #e2e5e9 100%);
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.08);
+  color: #5b6472;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+.off-btn:hover { background: radial-gradient(50% 50% at 50% 50%, #e5e8eb 0%, #d8dce1 100%); }

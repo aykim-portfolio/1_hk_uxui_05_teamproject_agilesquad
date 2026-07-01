@@ -1,8 +1,8 @@
 // Epic AI 사이드바: 무료/유료 토글, 탭(AI 검증 대화 / 이해관계자 시각), 페이월.
 import { useState } from 'react';
 
-export default function Sidebar({ onSubOpen }) {
-  const isPro = false; // 무료 플랜(비구독자) 뷰 — 유료/무료 전환 토글 제거됨
+export default function Sidebar({ onSubOpen, isPremium }) {
+  const isPro = isPremium;
   const [tab, setTab] = useState('ai'); // 'ai' | 'stake'
   const [input, setInput] = useState('');
 

@@ -5,7 +5,6 @@ export const products = [
   { id: 3, name: '모바일 한경', desc: '출퇴근 시간, 바쁜 일상 속에서 가장 빠르게 주요 뉴스를 브리핑해주는 모바일 앱', price: 7500, bg: '#f0fdf4', ic: '#10b981', icon: 'ti-device-mobile' },
   { id: 4, name: '글로벌 마켓', desc: '월가 현지 특파원들이 전하는 생생한 글로벌 시장 분석과 투자 전략 리포트를 독점으로', price: 15000, bg: '#fffbeb', ic: '#f59e0b', icon: 'ti-world' },
   { id: 5, name: '한경 마켓인사이트', desc: '자본시장의 A to Z. IPO·M&A·공시 분석 등 전문가를 위한 심층 리포트', price: 22000, bg: '#fff1f2', ic: '#ef4444', icon: 'ti-chart-candle' },
-  { id: 6, name: '아르떼(arte)', desc: '프리미엄 문화예술 플랫폼. 공연, 전시 정보와 전문가의 비평으로 당신의 일상을 풍성하게', price: 5500, bg: '#eef2ff', ic: '#6366f1', icon: 'ti-palette' },
 ];
 
 // 선택 개수별 번들 할인율.

@@ -4,6 +4,7 @@ import { products, discountRate, formatKRW } from '../data/products';
 
 export default function SubscriptionModal({ open, onClose, onSubscribed }) {
   const [selected, setSelected] = useState(() => new Set());
+  const [newMemberSelected, setNewMemberSelected] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [success, setSuccess] = useState(null); // { orderId, dateStr, items, final, next }
 
@@ -82,6 +83,20 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
                     <div className="sub-card-price">{p.price.toLocaleString('ko-KR')}<span>원/월</span></div>
                   </div>
                 ))}
+                <div
+                  className={'sub-new-member' + (newMemberSelected ? ' sel' : '')}
+                  onClick={() => setNewMemberSelected((v) => !v)}
+                >
+                  <div className="sub-new-top">
+                    <div className="sub-new-icon-group">
+                      <div className="sub-new-icon"><i className="ti ti-ticket" aria-hidden="true"></i></div>
+                      <span className="sub-new-badge">신규 회원 혜택</span>
+                    </div>
+                    <div className="sub-new-check"><span className="sub-new-checkmark">✓</span></div>
+                  </div>
+                  <div className="sub-new-title">첫 달 구독료 0원 쿠폰</div>
+                  <div className="sub-new-desc">첫 달 0원 쿠폰으로 한경의 프리미엄 콘텐츠를 경험해보세요. (1/1)</div>
+                </div>
               </div>
             </div>
 
@@ -91,7 +106,7 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
                 {rate > 0 && <span className="sub-disc-badge">{Math.round(rate * 100)}% 할인 중</span>}
               </div>
 
-              {selected.size === 0
+              {(selected.size === 0 && !newMemberSelected)
                 ? <div className="sub-empty">구독하실 상품을 선택해 주세요</div>
                 : (
                   <div className="sub-items">
@@ -102,6 +117,13 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
                         <button className="sub-rm" onClick={(e) => { e.stopPropagation(); toggle(p.id); }} aria-label="삭제"><i className="ti ti-x" aria-hidden="true"></i></button>
                       </div>
                     ))}
+                    {newMemberSelected && (
+                      <div className="sub-item">
+                        <span className="sub-item-name">첫 달 구독료 0원 쿠폰</span>
+                        <span className="sub-item-price">0원</span>
+                        <button className="sub-rm" onClick={(e) => { e.stopPropagation(); setNewMemberSelected(false); }} aria-label="삭제"><i className="ti ti-x" aria-hidden="true"></i></button>
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -114,13 +136,8 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
                   <span style={{ color: '#3182f6' }}>{final.toLocaleString('ko-KR')} <small style={{ fontSize: 12, fontWeight: 500, color: '#8b95a1' }}>원/월</small></span>
                 </div>
               </div>
-              <button className="sub-cta" disabled={selected.size === 0} onClick={() => setConfirmOpen(true)}>구독하기</button>
+              <button className="sub-cta" disabled={selected.size === 0 && !newMemberSelected} onClick={() => setConfirmOpen(true)}>구독하기</button>
               <p className="sub-note">구독 시작 후 7일 이내 미사용 시 전액 환불 가능합니다.</p>
-              <div className="sub-new-member">
-                <span className="sub-new-badge">신규 회원 혜택</span>
-                <div className="sub-new-title">첫 달 구독료 0원</div>
-                <div className="sub-new-desc">지금 가입하고 한경의 프리미엄 콘텐츠를 경험해보세요.</div>
-              </div>
             </div>
           </div>
         )}

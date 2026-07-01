@@ -19,25 +19,6 @@ export default function Article({ level, onSubOpen }) {
 
   return (
     <main className="art-main content">
-      <h1 className="art-title">{levels[level].title}</h1>
-
-      <div className="art-byline">
-        <div className="art-byline-left">
-          <span className="art-avatar">한</span>
-          <span className="art-team">이소이·강태우·김해연 기자</span>
-          <span className="art-ai-label">
-            <i className="ti ti-shield-check" aria-hidden="true" style={{ fontSize: 11 }}></i> AI 신뢰 라벨링 적용
-          </span>
-          <span className="art-dates">입력: 2026.06.30 18:17  수정: 2026.07.01 00:37</span>
-        </div>
-        <div className="art-byline-icons">
-          <i className="ti ti-bookmark" aria-hidden="true" aria-label="북마크"></i>
-          <i className="ti ti-letter-case" aria-hidden="true" aria-label="글자 크기"></i>
-          <i className="ti ti-share" aria-hidden="true" aria-label="공유"></i>
-          <i className="ti ti-printer" aria-hidden="true" aria-label="인쇄"></i>
-        </div>
-      </div>
-
       <p className="art-hero-cap">전국 지자체가 하반기부터 상하수도 요금을 줄줄이 인상한다. / 한국경제 자료사진</p>
 
       <div

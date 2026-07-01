@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 export default function Sidebar({ onSubOpen }) {
-  const [isPro, setIsPro] = useState(false);
+  const isPro = false; // 무료 플랜(비구독자) 뷰 — 유료/무료 전환 토글 제거됨
   const [tab, setTab] = useState('ai'); // 'ai' | 'stake'
   const [input, setInput] = useState('');
 
@@ -21,25 +21,6 @@ export default function Sidebar({ onSubOpen }) {
       <div className="art-sidebar-sticky">
         <p className="panel-title">Epic AI 실시간 심층 탐색</p>
         <p className="panel-sub">기사 밖으로 나갈 필요 없는 원스톱 자본시장 분석</p>
-
-        <div className="mode-toggle">
-          <span className="toggle-label">
-            현재 상태: <strong>{isPro ? '유료 플랜' : '무료 플랜'}</strong>
-            {isPro
-              ? <span className="badge-pro">Pro</span>
-              : <span className="badge-free">Free</span>}
-          </span>
-          <div
-            className="toggle-switch"
-            onClick={() => setIsPro((v) => !v)}
-            role="switch"
-            aria-checked={isPro}
-            aria-label="유료/무료 전환"
-          >
-            <div className={'toggle-track' + (isPro ? ' on' : '')}></div>
-            <div className={'toggle-thumb' + (isPro ? ' on' : '')}></div>
-          </div>
-        </div>
 
         <div className="tab-bar">
           <button className={'tab-btn' + (tab === 'ai' ? ' active' : '')} onClick={() => setTab('ai')}>AI 검증 대화</button>

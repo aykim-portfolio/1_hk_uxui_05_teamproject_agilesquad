@@ -389,10 +389,6 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .glossary-qmark, .glossary-amark { font-weight: 800; color: #b45309; }
 .glossary-a { color: #5b4a30; margin-top: 4px; margin-left: 26px; }
 
-/* 푸터 */
-.art-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e8eb; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-.art-copyright { font-size: 12px; color: #8b95a1; }
-
 .art-author-card { margin-top: 28px; padding: 20px; background: #f9fafb; border-radius: 12px; }
 .art-author-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .art-author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #e5e8eb; }
@@ -402,7 +398,6 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 /* 쉽게읽기 모드 — 차가운 회색 톤을 배경(#FDFBF7)과 어울리는 따뜻한 톤으로 통일 */
 .page--easy .art-dates,
 .page--easy .art-hero-cap,
-.page--easy .art-copyright,
 .page--easy .art-byline-icons { color: #a9906b; }
 .page--easy .art-byline-icons i:hover { color: #7c5a1e; }
 .page--easy .art-author-desc { color: #8a7355; }

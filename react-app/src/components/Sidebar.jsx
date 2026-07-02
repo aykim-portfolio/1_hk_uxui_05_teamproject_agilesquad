@@ -1,7 +1,7 @@
 // Epic AI 사이드바: 무료/유료 토글, 탭(AI 검증 대화 / 이해관계자 시각), 페이월.
 import { useRef, useState } from 'react';
 
-export default function Sidebar({ onSubOpen, isPremium }) {
+export default function Sidebar({ level, onSubOpen, isPremium }) {
   const isPro = isPremium;
   const [tab, setTab] = useState('ai'); // 'ai' | 'stake'
   const [input, setInput] = useState('');
@@ -34,7 +34,9 @@ export default function Sidebar({ onSubOpen, isPremium }) {
     <aside className="art-sidebar aside">
       <div className="art-sidebar-sticky">
         <p className="panel-title">Epic AI 실시간 심층 탐색</p>
-        <p className="panel-sub">기사 밖으로 나갈 필요 없는 원스톱 자본시장 분석</p>
+        <p className="panel-sub">
+          {level === 2 ? '궁금한 점을 물어보세요!' : '기사 밖으로 나갈 필요 없는 원스톱 자본시장 분석'}
+        </p>
 
         <div className="tab-bar">
           <button className={'tab-btn' + (tab === 'ai' ? ' active' : '')} onClick={() => setTab('ai')}>AI 검증 대화</button>

@@ -323,6 +323,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 
 /* ── hk-stat 수치 하이라이트 + 팝오버 (stat-highlight-embed.html 이식) ── */
 .hk-stat-scope { --hk-text-primary:#191f28; --hk-text-secondary:#4e5968; --hk-text-tertiary:#8b95a1; --hk-border-default:#e5e8eb; --hk-bg-surface:#ffffff; --hk-bg-brand:#e8f3ff; --hk-brand-primary:#143c7e; --hk-brand-primary-hover:#0e2856; --hk-elevation-popover:0 4px 16px -2px rgba(0,0,0,0.10); }
+.page--easy .hk-stat-scope { --hk-brand-primary: #d53b57; --hk-brand-primary-hover: #b52e46; --hk-bg-brand: #fbe6ea; }
 .hk-stat { position: relative; display: inline; border-bottom: 1px dotted var(--hk-brand-primary); cursor: pointer; font-weight: 600; color: var(--hk-brand-primary); border-radius: 2px 2px 0 0; transition: background .12s ease; font-family: var(--font-num); }
 .hk-stat:hover, .hk-stat.hk-open { background: var(--hk-bg-brand); color: var(--hk-brand-primary-hover); }
 .hk-stat:focus-visible { outline: 2px solid var(--hk-brand-primary); outline-offset: 2px; }
@@ -382,16 +383,20 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
   flex-shrink: 0;
 }
-.glossary-title { position: relative; font-size: 16px; font-weight: 700; color: #7c5a1e; display: flex; align-items: center; gap: 8px; font-family: var(--font-caption); }
+.glossary-title { position: relative; font-size: 16px; font-weight: 700; color: #3f2d0f; display: flex; align-items: center; gap: 8px; font-family: var(--font-caption); }
 .glossary-list { position: relative; display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
 .glossary-item { font-size: 13px; line-height: 1.6; color: #4e5968; }
 .glossary-q { font-weight: 700; color: #3f2d0f; }
-.glossary-qmark, .glossary-amark { font-weight: 800; color: #b45309; }
+.glossary-qmark, .glossary-amark { font-weight: 800; color: #d53b57; }
 .glossary-a { color: #5b4a30; margin-top: 4px; margin-left: 26px; }
 
 .art-author-card { margin-top: 28px; padding: 20px; background: #f9fafb; border-radius: 12px; }
 .art-author-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.art-author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #e5e8eb; }
+.art-author-avatar-group { display: flex; flex-shrink: 0; }
+.art-author-avatar { position: relative; width: 40px; height: 40px; border-radius: 50%; background: #e5e8eb; object-fit: cover; border: 2px solid #f9fafb; margin-left: -14px; }
+.art-author-avatar:first-child { margin-left: 0; z-index: 3; }
+.art-author-avatar:nth-child(2) { z-index: 2; }
+.art-author-avatar:nth-child(3) { z-index: 1; }
 .art-author-name { font-size: 15px; font-weight: 700; color: #191f28; }
 .art-author-desc { font-size: 13px; color: #4e5968; line-height: 1.6; }
 
@@ -401,10 +406,29 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .page--easy .art-byline-icons { color: #a9906b; }
 .page--easy .art-byline-icons i:hover { color: #7c5a1e; }
 .page--easy .art-author-desc { color: #8a7355; }
-.page--easy .art-author-avatar { background: #f3ead9; }
+.page--easy .art-author-avatar { background: #f3ead9; border-color: #f8f2e6; }
 .page--easy .art-author-card { background: #f8f2e6; }
+.page--easy .art-author-name { color: #3f2d0f; }
 .page--easy .rlv { background: #fffdf7; border-color: #e3d3a4; }
+.page--easy .rlv-label.active { color: #d53b57; }
+.page--easy .rlv-dot.active { background: #d53b57; }
+.page--easy .rlv-knob { border-color: #d53b57; box-shadow: 0 4px 12px rgba(213,59,87,0.18); }
+.page--easy .rlv-knob.dragging { box-shadow: 0 6px 20px rgba(213,59,87,0.25); }
+.page--easy .rlv-knob-dot { background: #d53b57; }
 .page--easy .art-sidebar { background: #f8f2e6; }
+/* 패널 내부 텍스트는 --text-* 변수를 통해 색을 받으므로, 스코프에서 변수를 덮어써 한 번에 통일 */
+.page--easy .art-sidebar { --text-primary: #3f2d0f; --text-secondary: #3f2d0f; --text-muted: #3f2d0f; --text-danger: #3f2d0f; }
+/* 쉽게읽기 모드 — 채팅 대화창처럼 보이도록 추천 질문(chip)은 말풍선, 입력줄은 하단 컴포즈 바 형태로 */
+.page--easy .chips { gap: 8px; }
+.page--easy .chip { background: #fffdf7; border-color: #e3d3a4; border-radius: 16px; }
+.page--easy .chip:hover { border-color: #d53b57; color: #d53b57; }
+.page--easy .input-row { margin-top: 4px; padding-top: 14px; border-top: 1px dashed #e3d3a4; }
+.page--easy .ai-input { background: #fffdf7; border-color: #e3d3a4; border-radius: 9999px; padding: 9px 16px; }
+.page--easy .ask-btn { background: #d53b57; border-radius: 9999px; }
+.page--easy .ask-btn:hover { background: #b52e46; }
+.ai-summary-card { background: #fffdf7; border: 1px solid #e3d3a4; border-radius: 16px; padding: 14px 16px; margin-bottom: 16px; }
+.ai-summary-head { font-size: 12px; font-weight: 700; color: #d53b57; margin: 0 0 6px; display: flex; align-items: center; gap: 6px; }
+.ai-summary-body { font-size: 13px; color: #3f2d0f; line-height: 1.6; margin: 0; }
 
 /* ══════════════ Epic AI 사이드바 ══════════════ */
 .art-sidebar { grid-area: aside; padding: 28px 24px; background: #f9fafb; }
@@ -429,7 +453,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .badge-free { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--bg-warning); color: var(--text-warning); margin-left: 6px; font-family: var(--font-caption); }
 .badge-pro { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--bg-pro); color: var(--text-pro); margin-left: 6px; font-family: var(--font-caption); }
 
-.tab-bar { display: grid; grid-template-columns: 1fr 1fr; background: #fff; border-radius: var(--radius); padding: 3px; margin-bottom: 20px; border: 0.5px solid var(--border); }
+.tab-bar { display: grid; grid-template-columns: 1fr 1fr; background: #fff; border-radius: var(--radius); padding: 3px; margin-bottom: 10px; border: 0.5px solid var(--border); }
 .tab-btn { padding: 8px 0; font-size: 13px; font-weight: 500; border: none; cursor: pointer; border-radius: 6px; background: transparent; color: var(--text-secondary); transition: all .15s; font-family: var(--font-sans); }
 .tab-btn.active { background: #fff; color: var(--text-primary); border: 0.5px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.06); font-weight: 700; }
 .ai-view { display: none; }

@@ -78,7 +78,9 @@ export default function ArticleHeader({
         <div className={'art-byline-left' + (currentLevel === 2 ? ' art-byline-left--easy' : '')}>
           <div className="art-authors">
             <span className="art-author">
-              <span className="art-avatar"><i className="ti ti-user" aria-hidden="true"></i></span>
+              <span className="art-avatar">
+                <img src="/Lee.png" alt="이소이 기자" />
+              </span>
               <span className="art-team">이소이 기자</span>
             </span>
             <span className="art-author">
@@ -88,7 +90,9 @@ export default function ArticleHeader({
               <span className="art-team">강태우 기자</span>
             </span>
             <span className="art-author">
-              <span className="art-avatar"><i className="ti ti-user" aria-hidden="true"></i></span>
+              <span className="art-avatar">
+                <img src="/Kim.png" alt="김해연 기자" />
+              </span>
               <span className="art-team">김해연 기자</span>
             </span>
           </div>

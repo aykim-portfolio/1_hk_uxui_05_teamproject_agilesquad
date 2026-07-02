@@ -188,7 +188,11 @@ export default function Article({ level, highlightColor, eraserActive }) {
 
       <div className="art-author-card">
         <div className="art-author-head">
-          <div className="art-author-avatar"></div>
+          <div className="art-author-avatar-group">
+            <img className="art-author-avatar" src="/Lee.png" alt="이소이 기자" />
+            <img className="art-author-avatar" src="/kang-taewoo.png" alt="강태우 기자" />
+            <img className="art-author-avatar" src="/Kim.png" alt="김해연 기자" />
+          </div>
           <div className="art-author-name">이소이·강태우·김해연 기자</div>
         </div>
         <div className="art-author-desc">안녕하세요. 한국경제 사회부입니다.</div>

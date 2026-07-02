@@ -261,6 +261,25 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .art-byline-icons { display: flex; align-items: center; gap: 14px; color: #8b95a1; font-size: 17px; }
 .art-byline-icons i, .art-byline-icons svg { cursor: pointer; flex-shrink: 0; }
 .art-byline-icons i:hover, .art-byline-icons svg:hover { color: #4e5968; }
+.art-byline-icon-wrap { position: relative; display: inline-flex; }
+.hk-color-palette {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #cfe0ff;
+  border-radius: 9999px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+  z-index: 50;
+}
+.hk-color-swatch { width: 26px; height: 26px; border-radius: 50%; border: none; padding: 0; cursor: pointer; transition: transform .12s ease; }
+.hk-color-swatch:hover { transform: scale(1.12); }
+.art-highlight-icon.active, .art-highlight-icon.active:hover { color: #3182f6; }
 
 .art-hero { width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 8px; background: #dbeafe; }
 .art-hero img { width: 100%; display: block; }
@@ -276,6 +295,8 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 
 .art-hl { background: #fef3c7; border-bottom: 2px solid #fbbf24; cursor: pointer; border-radius: 2px; padding: 1px 3px; font-family: var(--font-num); font-weight: 500; }
 .art-hl:hover { background: #fde68a; }
+
+.hk-highlight-mark { color: inherit; border-radius: 2px; }
 
 /* ── 세로 읽기 레벨 슬라이더 (원문/쉬운말/쉽게읽기) — article-support ── */
 .article-support { grid-area: support; padding: 28px 0; position: relative; }

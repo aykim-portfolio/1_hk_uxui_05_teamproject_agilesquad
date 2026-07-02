@@ -253,8 +253,8 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .art-dates { color: #8b95a1; font-family: var(--font-num); font-size: 12px; }
 .art-easy-mode { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #3182f6; cursor: pointer; font-weight: 500; }
 .art-byline-icons { display: flex; align-items: center; gap: 14px; color: #8b95a1; font-size: 17px; }
-.art-byline-icons i { cursor: pointer; }
-.art-byline-icons i:hover { color: #4e5968; }
+.art-byline-icons i, .art-byline-icons svg { cursor: pointer; flex-shrink: 0; }
+.art-byline-icons i:hover, .art-byline-icons svg:hover { color: #4e5968; }
 
 .art-hero { width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 8px; background: #dbeafe; }
 .art-hero img { width: 100%; display: block; }

@@ -112,10 +112,14 @@ export default function Sidebar({ level, onSubOpen, isPremium }) {
               <div className="paywall-overlay">
                 <div className="lock-gate">
                   <div className="lock-icon"><i className="ti ti-lock" aria-hidden="true"></i></div>
-                  <p className="lock-title">유료 구독 전용 기능입니다</p>
-                  <p className="lock-desc">AI 대화 및 구독 활용 현황은<br />한경 프리미엄 구독자에게 제공됩니다.</p>
-                  <button className="lock-cta" onClick={onSubOpen}><i className="ti ti-sparkles" aria-hidden="true" style={{ marginRight: 4, fontSize: 12 }}></i>유료 구독 신청 후 잠금해제 →</button>
-                  <p className="lock-cta-note">7일 무료 체험 후 결제 · 언제든 해지 가능</p>
+                  <p className="lock-title">{level === 2 ? '돈을 내야 볼 수 있어요' : '유료 구독 전용 기능입니다'}</p>
+                  <p className="lock-desc">
+                    {level === 2
+                      ? <>AI랑 대화하고 구독 현황을 보려면<br />한경 프리미엄에 가입해야 해요.</>
+                      : <>AI 대화 및 구독 활용 현황은<br />한경 프리미엄 구독자에게 제공됩니다.</>}
+                  </p>
+                  <button className="lock-cta" onClick={onSubOpen}><i className="ti ti-sparkles" aria-hidden="true" style={{ marginRight: 4, fontSize: 12 }}></i>{level === 2 ? '구독하고 잠금 풀기 →' : '유료 구독 신청 후 잠금해제 →'}</button>
+                  <p className="lock-cta-note">{level === 2 ? '2주 동안 공짜예요 · 언제든 그만둘 수 있어요' : '7일 무료 체험 후 결제 · 언제든 해지 가능'}</p>
                 </div>
               </div>
             )}
@@ -162,10 +166,14 @@ export default function Sidebar({ level, onSubOpen, isPremium }) {
               <div className="paywall-overlay">
                 <div className="lock-gate">
                   <div className="lock-icon"><i className="ti ti-users" aria-hidden="true"></i></div>
-                  <p className="lock-title">다른 생각 요약 (유료 전용)</p>
-                  <p className="lock-desc">기사 원문 내의 다양한 이익집단의<br />상충되는 시선을 요약합니다.</p>
-                  <button className="lock-cta" onClick={onSubOpen}><i className="ti ti-sparkles" aria-hidden="true" style={{ marginRight: 4, fontSize: 12 }}></i>유료 구독 신청 후 잠금해제 →</button>
-                  <p className="lock-cta-note">7일 무료 체험 후 결제 · 언제든 해지 가능</p>
+                  <p className="lock-title">{level === 2 ? '다른 생각 보기 (구독자만)' : '다른 생각 요약 (유료 전용)'}</p>
+                  <p className="lock-desc">
+                    {level === 2
+                      ? <>사람마다 다르게 생각하는 부분을<br />짧게 정리해 줘요.</>
+                      : <>기사 원문 내의 다양한 이익집단의<br />상충되는 시선을 요약합니다.</>}
+                  </p>
+                  <button className="lock-cta" onClick={onSubOpen}><i className="ti ti-sparkles" aria-hidden="true" style={{ marginRight: 4, fontSize: 12 }}></i>{level === 2 ? '구독하고 잠금 풀기 →' : '유료 구독 신청 후 잠금해제 →'}</button>
+                  <p className="lock-cta-note">{level === 2 ? '2주 동안 공짜예요 · 언제든 그만둘 수 있어요' : '7일 무료 체험 후 결제 · 언제든 해지 가능'}</p>
                 </div>
               </div>
             )}

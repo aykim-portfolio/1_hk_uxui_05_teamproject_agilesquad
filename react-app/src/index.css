@@ -426,6 +426,8 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .page--easy .ai-input { background: #fffdf7; border-color: #e3d3a4; border-radius: 9999px; padding: 9px 16px; }
 .page--easy .ask-btn { background: #d53b57; border-radius: 9999px; }
 .page--easy .ask-btn:hover { background: #b52e46; }
+.page--easy .lock-cta { background: #d53b57; }
+.page--easy .lock-cta:hover { background: #b52e46; }
 .ai-summary-card { background: #fffdf7; border: 1px solid #e3d3a4; border-radius: 16px; padding: 14px 16px; margin-bottom: 16px; }
 .ai-summary-head { font-size: 12px; font-weight: 700; color: #d53b57; margin: 0 0 6px; display: flex; align-items: center; gap: 6px; }
 .ai-summary-body { font-size: 13px; color: #3f2d0f; line-height: 1.6; margin: 0; }

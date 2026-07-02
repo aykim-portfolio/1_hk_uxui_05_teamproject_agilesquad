@@ -96,7 +96,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
   pointer-events: none;
 }
 .hk-float-search.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
-.hk-float-logo { font-size: 22px; font-weight: 800; color: #142c67; font-family: var(--font-sans); flex-shrink: 0; }
+.hk-float-logo { height: 22px; width: auto; flex-shrink: 0; }
 .hk-float-input {
   flex: 1;
   max-width: 320px;

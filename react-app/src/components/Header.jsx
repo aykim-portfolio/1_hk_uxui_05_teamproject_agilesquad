@@ -1,4 +1,5 @@
 // 상단 헤더: 유틸리티 바 + 로고 + 내비게이션 + 지수 티커.
+import { useEffect, useRef, useState } from 'react';
 
 const tickers = [
   { name: '코스피200', val: '1,330.57', chg: '-8.50%', dir: 'down', caret: true },
@@ -12,8 +13,28 @@ const tickers = [
 const navItems = ['경제', '산업', '사회', '코리아마켓', '글로벌마켓', '집코노미', '국제', '유통', '오피니언'];
 
 export default function Header({ onSubOpen, isPremium }) {
+  const navRef = useRef(null);
+  const [navHidden, setNavHidden] = useState(false);
+
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setNavHidden(!entry.isIntersecting && entry.boundingClientRect.top < 0),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
+      <div className={'hk-float-search' + (navHidden ? ' show' : '')}>
+        <span className="hk-float-logo">한경</span>
+        <input className="hk-float-input" type="text" placeholder="AI 검색" />
+        <button className="hk-float-btn">검색</button>
+      </div>
+
       <div className="hk-utility">
         <div className="hk-utility-left">
           <span className="hk-util-date">2026.06.29</span>
@@ -41,7 +62,7 @@ export default function Header({ onSubOpen, isPremium }) {
         </svg>
       </div>
 
-      <nav className="hk-nav">
+      <nav className="hk-nav" ref={navRef}>
         <button
           className={'hk-trial-btn' + (isPremium ? ' hk-trial-btn--hidden' : '')}
           onClick={onSubOpen}

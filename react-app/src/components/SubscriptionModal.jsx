@@ -4,7 +4,7 @@ import { products, discountRate, formatKRW } from '../data/products';
 
 export default function SubscriptionModal({ open, onClose, onSubscribed }) {
   const [selected, setSelected] = useState(() => new Set());
-  const [newMemberSelected, setNewMemberSelected] = useState(false);
+  const [newMemberSelected, setNewMemberSelected] = useState(true);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [success, setSuccess] = useState(null); // { orderId, dateStr, items, final, next }
 
@@ -14,6 +14,8 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
   const rate = discountRate(selected.size);
   const discAmt = Math.round(subtotal * rate);
   const final = subtotal - discAmt;
+  // 신규 회원 혜택 쿠폰과 한경 디지털 에디션의 그리드 위치를 서로 교체.
+  const gridProducts = [...products.slice(1), products[0]];
 
   function toggle(id) {
     setSelected((prev) => {
@@ -29,6 +31,7 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
       // 결제 완료 후 닫는 경우(외부 클릭 / X버튼 / 확인 버튼) 모두 동일하게 구독을 확정한다.
       onSubscribed?.();
       setSelected(new Set());
+      setNewMemberSelected(true);
       setSuccess(null);
     }
     onClose();
@@ -67,21 +70,6 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
               <h2>불필요한 정보는 걷어내고<br />당신의 콘텐츠만 골라 담으세요</h2>
               <p className="sub-subtitle">다중 선택 시 최대 30% 번들 할인 적용 · 첫 달 무료 체험 가능</p>
               <div className="sub-grid">
-                {products.map((p) => (
-                  <div
-                    key={p.id}
-                    className={'sub-card' + (selected.has(p.id) ? ' sel' : '')}
-                    onClick={() => toggle(p.id)}
-                  >
-                    <div className="sub-card-top">
-                      <div className="sub-icon" style={{ background: p.bg, color: p.ic }}><i className={'ti ' + p.icon} aria-hidden="true"></i></div>
-                      <div className="sub-check"><span className="sub-checkmark">✓</span></div>
-                    </div>
-                    <div className="sub-card-name">{p.name}</div>
-                    <div className="sub-card-desc">{p.desc}</div>
-                    <div className="sub-card-price">{p.price.toLocaleString('ko-KR')}<span>원/월</span></div>
-                  </div>
-                ))}
                 <div
                   className={'sub-new-member' + (newMemberSelected ? ' sel' : '')}
                   onClick={() => setNewMemberSelected((v) => !v)}
@@ -96,6 +84,21 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
                   <div className="sub-new-title">첫 달 구독료 0원 쿠폰</div>
                   <div className="sub-new-desc">첫 달 0원 쿠폰으로 한경의 프리미엄 콘텐츠를 경험해보세요. (1/1)</div>
                 </div>
+                {gridProducts.map((p) => (
+                  <div
+                    key={p.id}
+                    className={'sub-card' + (selected.has(p.id) ? ' sel' : '')}
+                    onClick={() => toggle(p.id)}
+                  >
+                    <div className="sub-card-top">
+                      <div className="sub-icon" style={{ background: p.bg, color: p.ic }}><i className={'ti ' + p.icon} aria-hidden="true"></i></div>
+                      <div className="sub-check"><span className="sub-checkmark">✓</span></div>
+                    </div>
+                    <div className="sub-card-name">{p.name}</div>
+                    <div className="sub-card-desc">{p.desc}</div>
+                    <div className="sub-card-price">{p.price.toLocaleString('ko-KR')}<span>원/월</span></div>
+                  </div>
+                ))}
               </div>
             </div>
 

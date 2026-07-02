@@ -3,9 +3,29 @@
 import { useEffect, useRef } from 'react';
 import { levels } from '../data/levels';
 import { initHkStatHighlight, attachHkStatDocHandler } from '../lib/hkStat';
+import { useFadeLevel } from '../lib/useFadeLevel';
+
+function FigureImg({ level }) {
+  return level === 2 ? (
+    <img
+      src="/water-story-illustration.png"
+      alt="수도요금 이야기 4컷 일러스트"
+      style={{ width: '100%', display: 'block' }}
+      loading="lazy"
+    />
+  ) : (
+    <img
+      src="/water-rate-table.png"
+      alt="줄줄이 오르는 지자체 상·하수도 요금 표"
+      style={{ width: '100%', display: 'block' }}
+      loading="lazy"
+    />
+  );
+}
 
 export default function Article({ level, onSubOpen }) {
   const bodyRef = useRef(null);
+  const { currentLevel, prevLevel } = useFadeLevel(level);
 
   // 문서 레벨 클릭 핸들러는 최초 1회 등록.
   useEffect(() => {
@@ -15,26 +35,39 @@ export default function Article({ level, onSubOpen }) {
   // 레벨이 바뀌어 본문 HTML 이 갈릴 때마다 팝오버 재부착.
   useEffect(() => {
     if (bodyRef.current) initHkStatHighlight(bodyRef.current);
-  }, [level]);
+  }, [currentLevel]);
 
   return (
     <main className="art-main content">
       <p className="art-hero-cap">전국 지자체가 하반기부터 상하수도 요금을 줄줄이 인상한다. / 한국경제 자료사진</p>
 
-      <div
-        className="art-body hk-stat-scope"
-        ref={bodyRef}
-        dangerouslySetInnerHTML={{ __html: levels[level].body }}
-      />
-
-      <figure className="art-figure">
-        <img
-          src="/water-rate-table.png"
-          alt="줄줄이 오르는 지자체 상·하수도 요금 표"
-          style={{ width: '100%', display: 'block' }}
-          loading="lazy"
+      <div className="hk-crossfade">
+        {prevLevel !== null && (
+          <div
+            key={'old-' + prevLevel}
+            aria-hidden="true"
+            className={'art-body hk-stat-scope hk-crossfade-old' + (prevLevel === 2 ? ' art-body--easy' : '')}
+            dangerouslySetInnerHTML={{ __html: levels[prevLevel].body }}
+          />
+        )}
+        <div
+          key={'new-' + currentLevel}
+          ref={bodyRef}
+          className={'art-body hk-stat-scope hk-crossfade-new' + (currentLevel === 2 ? ' art-body--easy' : '')}
+          dangerouslySetInnerHTML={{ __html: levels[currentLevel].body }}
         />
-      </figure>
+      </div>
+
+      <div className="hk-crossfade">
+        {prevLevel !== null && (
+          <figure key={'oldfig-' + prevLevel} aria-hidden="true" className="art-figure hk-crossfade-old">
+            <FigureImg level={prevLevel} />
+          </figure>
+        )}
+        <figure key={'newfig-' + currentLevel} className="art-figure hk-crossfade-new">
+          <FigureImg level={currentLevel} />
+        </figure>
+      </div>
 
       {/* 쉬운 읽기 — 용어 설명 */}
       <div className="glossary">

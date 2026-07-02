@@ -22,15 +22,9 @@ export default function App() {
 
       <div className={'page' + (level === 2 ? ' page--easy' : '')}>
         <ReadingLevelSlider level={level} onChange={setLevel} />
-        <ArticleHeader
-          level={level}
-          highlightColor={highlightColor}
-          onHighlightColorChange={setHighlightColor}
-          eraserActive={eraserActive}
-          onEraserActiveChange={setEraserActive}
-        />
-        <Article level={level} onSubOpen={openSub} highlightColor={highlightColor} eraserActive={eraserActive} />
-        <Sidebar onSubOpen={openSub} isPremium={isPremium} />
+        <ArticleHeader level={level} />
+        <Article level={level} />
+        <Sidebar level={level} onSubOpen={openSub} isPremium={isPremium} />
       </div>
 
       <SubscriptionModal

@@ -5,12 +5,17 @@ import { percentageMap } from '../data/levels';
 
 const GHOST_DURATION = 1000; // ms — .rlv-knob-ghost 페이드아웃 트랜지션과 동일하게 유지
 
+const FOLLOW_EASE = 0.15; // 스크롤 후 목표 위치를 따라잡는 보간 계수 (클수록 빨리 따라붙음)
+
 export default function ReadingLevelSlider({ level, onChange }) {
   const trackRef = useRef(null);
   const draggingRef = useRef(false);
   const prevLevelRef = useRef(level);
   const ghostIdRef = useRef(0);
   const [ghosts, setGhosts] = useState([]);
+  const containerRef = useRef(null);
+  const followRef = useRef(null);
+  const currentYRef = useRef(null);
 
   // 레벨이 바뀌면 이전 knob 위치에 잔상(ghost)을 남기고 페이드아웃 후 제거.
   useEffect(() => {
@@ -25,6 +30,44 @@ export default function ReadingLevelSlider({ level, onChange }) {
     }
     prevLevelRef.current = level;
   }, [level]);
+
+  // 화면(뷰포트) 중앙을 목표로 하되, 스크롤 직후 곧바로 스냅되지 않고
+  // 부드럽게 뒤따라가는(lerp) 느낌을 주기 위해 매 프레임 위치를 보간.
+  useEffect(() => {
+    const container = containerRef.current;
+    const follow = followRef.current;
+    if (!container || !follow) return;
+
+    let rafId;
+
+    function computeTargetY(rect, elHeight) {
+      const viewportCenter = window.innerHeight / 2;
+      const minY = rect.top;
+      const maxY = rect.bottom - elHeight;
+      if (maxY < minY) return rect.top + (rect.height - elHeight) / 2;
+      return Math.max(minY, Math.min(maxY, viewportCenter - elHeight / 2));
+    }
+
+    const rect0 = container.getBoundingClientRect();
+    currentYRef.current = computeTargetY(rect0, follow.offsetHeight);
+    follow.style.left = rect0.left + 'px';
+    follow.style.width = rect0.width + 'px';
+    follow.style.transform = `translateY(${currentYRef.current}px)`;
+
+    function tick() {
+      const rect = container.getBoundingClientRect();
+      const elHeight = follow.offsetHeight;
+      const targetY = computeTargetY(rect, elHeight);
+      currentYRef.current += (targetY - currentYRef.current) * FOLLOW_EASE;
+      follow.style.left = rect.left + 'px';
+      follow.style.width = rect.width + 'px';
+      follow.style.transform = `translateY(${currentYRef.current}px)`;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
 
   function levelFromEvent(e) {
     const rect = trackRef.current.getBoundingClientRect();
@@ -50,9 +93,9 @@ export default function ReadingLevelSlider({ level, onChange }) {
   }
 
   return (
-    <div className="article-support">
+    <div className="article-support" ref={containerRef}>
+      <div className="rlv-follow" ref={followRef}>
       <div className="rlv" role="group" aria-label="읽기 난이도 선택">
-        <span className="rlv-cap"><i className="ti ti-eye" aria-hidden="true"></i>쉬운 읽기</span>
         <span
           className={'rlv-label' + (level === 0 ? ' active' : '')}
           data-level="0"
@@ -91,6 +134,7 @@ export default function ReadingLevelSlider({ level, onChange }) {
         >
           쉽게읽기
         </span>
+      </div>
       </div>
     </div>
   );

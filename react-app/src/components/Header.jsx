@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 const tickers = [
-  { name: '코스피200', val: '1,330.57', chg: '-8.50%', dir: 'down', caret: true },
+  { name: '코스피200', val: '1,330.57', chg: '-8.50%', dir: 'down' },
   { name: 'S&P 500', val: '7,357.49', chg: '-0.01%', dir: 'down' },
   { name: '나스닥', val: '25,358.60', chg: '-0.46%', dir: 'down' },
   { name: '다우존스', val: '51,920.62', chg: '+0.14%', dir: 'up' },

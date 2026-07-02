@@ -18,7 +18,7 @@ export default function App() {
     <>
       <Header onSubOpen={openSub} isPremium={isPremium} />
 
-      <div className="page">
+      <div className={'page' + (level === 2 ? ' page--easy' : '')}>
         <ReadingLevelSlider level={level} onChange={setLevel} />
         <ArticleHeader level={level} />
         <Article level={level} onSubOpen={openSub} />

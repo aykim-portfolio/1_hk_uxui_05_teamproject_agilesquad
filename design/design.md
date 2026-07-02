@@ -338,16 +338,22 @@ cornerRadius에 바인딩 (topLeft/topRight/bottomLeft/bottomRight 개별).
 
 ## 6. 그라디언트
 
-| 스타일명 | 방향 | 색상 | 사용처 |
-|---|---|---|---|
-| Gradient/Primary | 135° | #3182f6 → #6366f1 | 주요 CTA 버튼, 배너 배경 |
-| Gradient/Dark-Hero | 135° | #1e1b4b → #2a2a6a | 슬라이드 히어로 다크 배경 |
-| Gradient/Indigo-Deep | 135° | #312e81 → #1e40af | 딥 인디고 강조 배경 |
-| Gradient/Teal-Accent | 135° | #10b981 → #3182f6 | 긍정 포인트 강조 |
-| Gradient/Surface-Light | 180° | #f9fafb → #f0f2f5 | 섹션 배경, 서피스 |
-| Gradient/Warm-Sunset | 135° | #f59e0b → #ef4444 | 경고·위험 포인트 |
-| Gradient/DataViz-Blue | 180° | #e8f3ff → #3182f6 | 데이터 시각화 배경 |
-| Gradient/Glass-Dark | 135° | 반투명 인디고 레이어 | 다크 글래스 효과 |
+그라디언트 스타일은 배경, CTA, 데이터 시각화 등 목적에 따라 구분됩니다.
+방향은 모두 **135° 대각선 (↘)** 기준이며, Glass Dark는 알파(투명도)를 포함합니다.
+
+| 스타일명 | 용도 | 방향 | Start (0%) | End (100%) | CSS |
+|---|---|---|---|---|---|
+| **Gradient/Primary** | 브랜드 CTA | 135° diagonal | `#3182f6` 100% | `#6366f1` 100% | `linear-gradient(135deg, #3182f6, #6366f1)` |
+| **Gradient/Dark-Hero** | 슬라이드 배경 | 135° diagonal | `#1e1b4b` 100% | `#2a2a6a` 100% | `linear-gradient(135deg, #1e1b4b, #2a2a6a)` |
+| **Gradient/Indigo-Deep** | 딥 강조 | 135° diagonal | `#312e81` 100% | `#1e40af` 100% | `linear-gradient(135deg, #312e81, #1e40af)` |
+| **Gradient/Teal-Accent** | 포인트 | 135° diagonal | `#10b981` 100% | `#3182f6` 100% | `linear-gradient(135deg, #10b981, #3182f6)` |
+| **Gradient/Surface-Light** | 배경 | top → bottom | `#f9fafb` 100% | `#f0f2f5` 100% | `linear-gradient(180deg, #f9fafb, #f0f2f5)` |
+| **Gradient/Warm-Sunset** | 워닝 | 135° diagonal | `#f59e0b` 100% | `#ef4444` 100% | `linear-gradient(135deg, #f59e0b, #ef4444)` |
+| **Gradient/DataViz-Blue** | 데이터 시각화 | top → bottom | `#e8f3ff` 100% | `#3182f6` 80% | `linear-gradient(180deg, #e8f3ff, #3182f6cc)` |
+| **Gradient/Glass-Dark** | 글래스 다크 | 135° diagonal | `#6366f1` 30% | `#1e1b4b` 80% | `linear-gradient(135deg, #6366f14d, #1e1b4bcc)` |
+
+> **Glass Dark** 사용 시: 알파값이 있으므로 배경 레이어 위에 overlay로 적용합니다.
+> **DataViz Blue**는 fade-in 효과용이며 하단 색상(`#3182f6`)에 80% 불투명도를 사용합니다.
 
 ---
 

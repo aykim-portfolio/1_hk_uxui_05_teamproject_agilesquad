@@ -4,7 +4,7 @@ import { levels } from '../data/levels';
 export default function ArticleHeader({ level }) {
   return (
     <div className="art-header">
-      <h1 className="art-title">{levels[level].title}</h1>
+      <h1 className="art-title" key={level}>{levels[level].title}</h1>
 
       <div className="art-byline">
         <div className="art-byline-left">

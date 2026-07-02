@@ -23,6 +23,7 @@ export default function Article({ level, onSubOpen }) {
 
       <div
         className="art-body hk-stat-scope"
+        key={level}
         ref={bodyRef}
         dangerouslySetInnerHTML={{ __html: levels[level].body }}
       />

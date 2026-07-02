@@ -23,7 +23,7 @@ function FigureImg({ level }) {
   );
 }
 
-export default function Article({ level, onSubOpen }) {
+export default function Article({ level }) {
   const bodyRef = useRef(null);
   const { currentLevel, prevLevel } = useFadeLevel(level);
 
@@ -80,7 +80,6 @@ export default function Article({ level, onSubOpen }) {
           <div className="glossary-row">
             <span className="glossary-hole"></span>
             <div className="glossary-title">
-              <span className="glossary-icon"><i className="ti ti-search" aria-hidden="true"></i></span>
               기사를 잘 읽었나요?
             </div>
           </div>
@@ -112,11 +111,6 @@ export default function Article({ level, onSubOpen }) {
 
       <div className="art-footer">
         <span className="art-copyright">ⓒ 한경닷컴, 무단전재 및 재배포 금지</span>
-        <div className="art-footer-links">
-          <a className="art-footer-link" onClick={onSubOpen}>한국경제 구독신청</a>
-          <span className="art-footer-sep">|</span>
-          <a className="art-footer-link strong" onClick={onSubOpen}>한경 프리미엄9 구독신청</a>
-        </div>
       </div>
 
       <div className="art-author-card">

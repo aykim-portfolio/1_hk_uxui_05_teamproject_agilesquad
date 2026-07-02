@@ -21,8 +21,8 @@ export default function App() {
       <div className={'page' + (level === 2 ? ' page--easy' : '')}>
         <ReadingLevelSlider level={level} onChange={setLevel} />
         <ArticleHeader level={level} />
-        <Article level={level} onSubOpen={openSub} />
-        <Sidebar onSubOpen={openSub} isPremium={isPremium} />
+        <Article level={level} />
+        <Sidebar level={level} onSubOpen={openSub} isPremium={isPremium} />
       </div>
 
       <SubscriptionModal

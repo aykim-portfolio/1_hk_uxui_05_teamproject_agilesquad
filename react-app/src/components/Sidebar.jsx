@@ -8,25 +8,59 @@ import { levels } from '../data/levels';
 // "쉬운 읽기" 자체를 위축시키는 신호가 되므로 항상 원문 기준으로 고정한다.
 const INSIGHT_COUNT = (levels[0].body.match(/class="hk-stat"/g) || []).length + 3;
 
+// 추천 질문. label은 칩에 보여줄 짧은 문구, question은 실제로 입력창에 채워질(=질문될) 전체 문장.
+const SUGGESTED_QUESTIONS = [
+  { label: '상하수도 순손실 2조3138억원의 출처는?', question: '상하수도 순손실 2조3138억원의 정확한 출처는?' },
+  { label: '우리 지역 3인 가구 요금 인상액은?', question: '우리 지역 3인 가구 기준 요금 인상액은 얼마인가요?' },
+  { label: '요금 현실화율이 낮은 지자체 순위는?', question: '요금 현실화율이 낮은 지자체 순위 요약은?' },
+];
+// 쉽게읽기 모드(level 2) 전용 추천 질문.
+const EASY_SUGGESTED_QUESTIONS = [
+  { label: '2조3138억원은 어디서 나온 숫자예요?', question: '2조3138억원은 어디서 나온 숫자예요?' },
+  { label: '우리 집 수도요금은 얼마나 오르나요?', question: '우리 집 수도요금은 얼마나 오르나요?' },
+  { label: '요금을 제일 조금 걷는 동네는 어디예요?', question: '요금을 제일 조금 걷는 동네는 어디예요?' },
+];
+
 export default function Sidebar({ level, onSubOpen, isPremium }) {
   const isPro = isPremium;
   const [tab, setTab] = useState('ai'); // 'ai' | 'stake'
   const [input, setInput] = useState('');
   const [flash, setFlash] = useState(false);
   const [askCount, setAskCount] = useState(0);
+  const [messages, setMessages] = useState([]); // [{ id, question, answer, loading }] — 질문할 때마다 아래로 쌓임
+  const [usedQuestions, setUsedQuestions] = useState(() => new Set()); // 이미 물어본 추천 질문(question 값 기준)
   const flashTimerRef = useRef(null);
+  const msgIdRef = useRef(0);
 
   const lockedStyle = isPro
     ? { opacity: 1, pointerEvents: 'auto' }
     : { opacity: 0.3, pointerEvents: 'none' };
 
+  const activeSuggestions = level === 2 ? EASY_SUGGESTED_QUESTIONS : SUGGESTED_QUESTIONS;
+  const remainingSuggestions = activeSuggestions.filter((s) => !usedQuestions.has(s.question));
+
+  // TODO: 실제 응답은 GROQ 연동 예정. 현재는 UI 흐름(질문 → 답변 로딩 → 답변 표시) 시연용 목업.
+  // 새 질문은 기존 대화 아래로 쌓이고(리스트), 각 항목은 등장할 때 페이드인된다.
   function handleAsk() {
     if (!isPro) return;
     const v = input.trim();
-    if (v) {
-      alert('질문: ' + v);
-      setAskCount((n) => n + 1);
+    if (!v) return;
+    const id = msgIdRef.current++;
+    setMessages((prev) => [...prev, { id, question: v, answer: '', loading: true }]);
+    setInput('');
+    setAskCount((n) => n + 1);
+    if (activeSuggestions.some((s) => s.question === v)) {
+      setUsedQuestions((prev) => new Set(prev).add(v));
     }
+    setTimeout(() => {
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === id
+            ? { ...m, loading: false, answer: '실시간 데이터 교차 검증 결과, 관련 수치는 행안부 지방공기업 결산 원자료 및 지자체 고시와 일치합니다.' }
+            : m
+        )
+      );
+    }, 1200);
   }
 
   // 키보드로 입력을 모두 지운 순간(비어있지 않다가 → 비게 됨)에만 flash 효과.
@@ -74,21 +108,36 @@ export default function Sidebar({ level, onSubOpen, isPremium }) {
                   <p className="ai-summary-body">수도요금이 올라요. 낡은 수도관을 고치고 깨끗한 물을 보내려면 돈이 필요해서, 여러 동네에서 요금을 조금씩 올리기로 했어요.</p>
                 </div>
               )}
-              <div className="chips">
-                {level === 2 ? (
-                  <>
-                    <button className="chip" onClick={() => isPro && setInput('2조3138억원은 어디서 나온 숫자예요?')}>2조3138억원은 어디서 나온 숫자예요?</button>
-                    <button className="chip" onClick={() => isPro && setInput('우리 집 수도요금은 얼마나 오르나요?')}>우리 집 수도요금은 얼마나 오르나요?</button>
-                    <button className="chip" onClick={() => isPro && setInput('요금을 제일 조금 걷는 동네는 어디예요?')}>요금을 제일 조금 걷는 동네는 어디예요?</button>
-                  </>
-                ) : (
-                  <>
-                    <button className="chip" onClick={() => isPro && setInput('상하수도 순손실 2조3138억원의 정확한 출처는?')}>상하수도 순손실 2조3138억원의 출처는?</button>
-                    <button className="chip" onClick={() => isPro && setInput('우리 지역 3인 가구 기준 요금 인상액은 얼마인가요?')}>우리 지역 3인 가구 요금 인상액은?</button>
-                    <button className="chip" onClick={() => isPro && setInput('요금 현실화율이 낮은 지자체 순위 요약은?')}>요금 현실화율이 낮은 지자체 순위는?</button>
-                  </>
-                )}
-              </div>
+              {messages.length === 0 && (
+                <div className="chips">
+                  {activeSuggestions.map((s) => (
+                    <button key={s.question} className="chip" onClick={() => isPro && setInput(s.question)}>{s.label}</button>
+                  ))}
+                </div>
+              )}
+              {messages.length > 0 && (
+                <>
+                  <div className="ai-qa-list">
+                    {messages.map((m) => (
+                      <div className="ai-qa-item" key={m.id}>
+                        <div className="ai-qa-bubble ai-qa-q">{m.question}</div>
+                        <div className={'ai-qa-bubble ai-qa-a' + (m.loading ? ' loading' : '')}>
+                          {m.loading ? (
+                            <span className="ai-qa-dots"><span></span><span></span><span></span></span>
+                          ) : m.answer}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {remainingSuggestions.length > 0 && (
+                    <div className="chips">
+                      {remainingSuggestions.map((s) => (
+                        <button key={s.question} className="chip" onClick={() => isPro && setInput(s.question)}>{s.label}</button>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
               <div className="input-row">
                 <input
                   className={'ai-input' + (flash ? ' flash' : '')}

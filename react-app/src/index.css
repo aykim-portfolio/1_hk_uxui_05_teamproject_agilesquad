@@ -76,6 +76,52 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-primary); }
 
+/* ── 스크롤 시 나타나는 플로팅 검색바 ── */
+.hk-float-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  background: #fff;
+  border-bottom: 1px solid #e5e8eb;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  pointer-events: none;
+}
+.hk-float-search.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.hk-float-logo { font-size: 22px; font-weight: 800; color: #142c67; font-family: var(--font-sans); flex-shrink: 0; }
+.hk-float-input {
+  flex: 1;
+  max-width: 320px;
+  background: #f9fafb;
+  border: 1px solid #e5e8eb;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #191f28;
+  font-family: var(--font-sans);
+}
+.hk-float-input::placeholder { color: #9ca3af; }
+.hk-float-btn {
+  background: #143c7e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+.hk-float-btn:hover { background: #0e2856; }
+
 /* ══════════════ 상단 헤더 ══════════════ */
 .hk-utility {
   background: #fff;

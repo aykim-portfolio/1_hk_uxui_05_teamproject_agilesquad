@@ -26,7 +26,7 @@ export default function ArticleHeader({ level }) {
       </div>
 
       <div className="art-byline">
-        <div className="art-byline-left">
+        <div className={'art-byline-left' + (currentLevel === 2 ? ' art-byline-left--easy' : '')}>
           <div className="art-authors">
             <span className="art-author">
               <span className="art-avatar"><i className="ti ti-user" aria-hidden="true"></i></span>

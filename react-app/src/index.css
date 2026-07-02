@@ -231,7 +231,9 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
   margin: 0 auto;
   gap: 0;
   background: #fff;
+  transition: background-color .48s ease;
 }
+.page--easy { background-color: #FDFBF7; }
 
 /* 기사 제목/바이라인 — article 본문 + aside 상단을 모두 가로지르는 헤더 */
 .art-header { grid-area: header; padding: 36px 44px 0; }
@@ -239,9 +241,13 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 /* 기사 */
 .art-main { grid-area: body; padding: 24px 44px 48px; border-right: 1px solid #e5e8eb; min-width: 0; }
 .art-title { font-size: 32px; font-weight: 800; color: #191f28; line-height: 1.35; margin-bottom: 18px; letter-spacing: -0.01em; }
-.art-title--easy { font-family: 'Binggrae2', var(--font-sans); }
+.art-title--easy { font-family: 'Binggrae2', var(--font-sans); color: #3f2d0f; }
 .art-byline { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #e5e8eb; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
 .art-byline-left { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #4e5968; flex-wrap: wrap; }
+.art-byline-left--easy, .art-byline-left--easy .art-team, .art-byline-left--easy .art-dates { font-family: 'Binggrae', var(--font-sans); }
+.art-byline-left--easy .art-author .art-team { color: #3f2d0f; }
+.art-byline-left--easy .art-avatar { background: #f3ead9; }
+.art-byline-left--easy .art-avatar i { color: #a9906b; }
 .art-avatar { width: 24px; height: 24px; border-radius: 50%; background: #e5e8eb; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #8b95a1; overflow: hidden; flex-shrink: 0; }
 .art-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .art-avatar i { font-size: 14px; }
@@ -264,15 +270,18 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .art-hero-cap { font-size: 12px; color: #8b95a1; margin-bottom: 24px; padding: 6px 2px; }
 
 .art-body { font-size: 16px; color: #333; line-height: 1.9; }
-.art-body--easy { font-family: 'Binggrae', var(--font-sans); }
+.art-body--easy { font-family: 'Binggrae', var(--font-sans); color: #3f2d0f; }
+.art-body--easy strong { color: #3f2d0f; }
 .art-body p { margin-bottom: 20px; }
 
 .art-hl { background: #fef3c7; border-bottom: 2px solid #fbbf24; cursor: pointer; border-radius: 2px; padding: 1px 3px; font-family: var(--font-num); font-weight: 500; }
 .art-hl:hover { background: #fde68a; }
 
 /* ── 세로 읽기 레벨 슬라이더 (원문/쉬운말/쉽게읽기) — article-support ── */
-.article-support { grid-area: support; padding: 28px 0; }
-.rlv { position: sticky; top: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; width: fit-content; margin: 0 auto; background: #ffffff; border: 1px solid #e5e8eb; border-radius: 9999px; padding: 20px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+.article-support { grid-area: support; padding: 28px 0; position: relative; }
+/* JS(rAF)로 매 프레임 위치를 보간해 화면 중앙을 부드럽게 뒤따라감 (ReadingLevelSlider.jsx) */
+.rlv-follow { position: fixed; top: 0; left: 0; z-index: 5; will-change: transform; }
+.rlv { display: flex; flex-direction: column; align-items: center; gap: 14px; width: fit-content; margin: 0 auto; background: #ffffff; border: 1px solid #e5e8eb; border-radius: 9999px; padding: 20px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
 .rlv-cap { font-size: 11px; color: #4e5968; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 3px; margin-bottom: 2px; }
 .rlv-cap i { color: #143c7e; font-size: 16px; }
 .rlv-label { font-size: 12px; font-weight: 700; color: #9ca3af; cursor: pointer; user-select: none; transition: all .15s; white-space: nowrap; }
@@ -311,7 +320,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .hk-stat-btn:hover { background: var(--hk-brand-primary-hover); border-color: var(--hk-brand-primary-hover); }
 
 /* 본문 인포그래픽 표 */
-.art-figure { margin: 8px 0 32px; border: 1px solid #e5e8eb; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+.art-figure { margin: 8px 0 6px; border: 1px solid #e5e8eb; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
 
 /* ── 읽기 레벨 전환 크로스페이드: 나가는 콘텐츠와 들어오는 콘텐츠가 겹쳐서 동시에 페이드 ── */
 .hk-crossfade { position: relative; }
@@ -330,19 +339,35 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .art-table .timing { color: #3182f6; font-weight: 500; white-space: nowrap; }
 .art-table .num { font-family: var(--font-num); }
 
-/* 쉬운 읽기 — 용어 설명 박스 */
+/* 비밀 수첩 — 기사 이해도 확인 퀴즈 */
 .glossary {
-  background: #eef2ff;
-  border: 1px solid #e0e7ff;
-  border-radius: 12px;
-  padding: 18px 22px;
+  position: relative;
+  background: #fbf3df;
+  background-image: repeating-linear-gradient(180deg, #fbf3df 0 27px, #ecdfc0 27px 28px);
+  background-position: 0 0;
+  border: 1px solid #e3d3a4;
+  border-radius: 8px;
+  padding: 22px 24px;
   margin: 8px 0 32px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
 }
-.glossary-title { font-size: 14px; font-weight: 700; color: #4f46e5; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
-.glossary-list { display: flex; flex-direction: column; gap: 8px; }
+.glossary-row, .glossary-q-row { display: flex; align-items: center; gap: 12px; }
+.glossary-hole {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #f2f4f6;
+  border: 1px solid #d8c69a;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+.glossary-title { position: relative; font-size: 16px; font-weight: 700; color: #7c5a1e; display: flex; align-items: center; gap: 8px; font-family: var(--font-caption); }
+.glossary-icon { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: #fff7e6; border: 1px solid #e3d3a4; color: #b45309; font-size: 16px; flex-shrink: 0; }
+.glossary-list { position: relative; display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
 .glossary-item { font-size: 13px; line-height: 1.6; color: #4e5968; }
-.glossary-term { font-weight: 700; color: #312e81; }
+.glossary-q { font-weight: 700; color: #3f2d0f; }
+.glossary-qmark, .glossary-amark { font-weight: 800; color: #b45309; }
+.glossary-a { color: #5b4a30; margin-top: 4px; margin-left: 26px; }
 
 /* 푸터 */
 .art-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e8eb; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
@@ -358,6 +383,20 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .art-author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #e5e8eb; }
 .art-author-name { font-size: 15px; font-weight: 700; color: #191f28; }
 .art-author-desc { font-size: 13px; color: #4e5968; line-height: 1.6; }
+
+/* 쉽게읽기 모드 — 차가운 회색 톤을 배경(#FDFBF7)과 어울리는 따뜻한 톤으로 통일 */
+.page--easy .art-dates,
+.page--easy .art-hero-cap,
+.page--easy .art-copyright,
+.page--easy .art-byline-icons { color: #a9906b; }
+.page--easy .art-byline-icons i:hover { color: #7c5a1e; }
+.page--easy .art-footer-link { color: #8a7355; }
+.page--easy .art-footer-link:hover { color: #7c5a1e; }
+.page--easy .art-author-desc { color: #8a7355; }
+.page--easy .art-author-avatar { background: #f3ead9; }
+.page--easy .art-author-card { background: #f8f2e6; }
+.page--easy .rlv { background: #fffdf7; border-color: #e3d3a4; }
+.page--easy .art-sidebar { background: #f8f2e6; }
 
 /* ══════════════ Epic AI 사이드바 ══════════════ */
 .art-sidebar { grid-area: aside; padding: 28px 24px; background: #f9fafb; }

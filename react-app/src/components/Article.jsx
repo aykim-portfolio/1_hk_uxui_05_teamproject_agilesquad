@@ -15,7 +15,7 @@ function FigureImg({ level }) {
     />
   ) : (
     <img
-      src="/water-rate-table.png"
+      src="/water.png"
       alt="줄줄이 오르는 지자체 상·하수도 요금 표"
       style={{ width: '100%', display: 'block' }}
       loading="lazy"
@@ -37,10 +37,13 @@ export default function Article({ level, onSubOpen }) {
     if (bodyRef.current) initHkStatHighlight(bodyRef.current);
   }, [currentLevel]);
 
+  const heroCaption =
+    currentLevel === 2
+      ? '여러 동네에서 수도요금이 오르고 있어요 / 한국경제 자료사진'
+      : '전국 지자체가 하반기부터 상하수도 요금을 줄줄이 인상한다. / 한국경제 자료사진';
+
   return (
     <main className="art-main content">
-      <p className="art-hero-cap">전국 지자체가 하반기부터 상하수도 요금을 줄줄이 인상한다. / 한국경제 자료사진</p>
-
       <div className="hk-crossfade">
         {prevLevel !== null && (
           <div
@@ -69,15 +72,43 @@ export default function Article({ level, onSubOpen }) {
         </figure>
       </div>
 
-      {/* 쉬운 읽기 — 용어 설명 */}
-      <div className="glossary">
-        <div className="glossary-title"><i className="ti ti-sparkles" aria-hidden="true"></i> 어떤 말이 어려웠나요?</div>
-        <div className="glossary-list">
-          <div className="glossary-item"><span className="glossary-term">요금 현실화율</span>: 물을 공급하는 원가 대비 실제로 받는 요금의 비율. 100%보다 낮으면 팔수록 손해라는 뜻</div>
-          <div className="glossary-item"><span className="glossary-term">순손실</span>: 벌어들인 돈보다 쓴 돈이 많아 최종적으로 남은 적자</div>
-          <div className="glossary-item"><span className="glossary-term">고지분</span>: 요금 고지서가 나가는 청구 기준 시점. '8월 고지분'은 8월에 청구되는 사용분</div>
+      <p className="art-hero-cap">{heroCaption}</p>
+
+      {/* 비밀 수첩 — 기사 이해도 확인 퀴즈 (쉽게읽기 모드 전용) */}
+      {currentLevel === 2 && (
+        <div className="glossary">
+          <div className="glossary-row">
+            <span className="glossary-hole"></span>
+            <div className="glossary-title">
+              <span className="glossary-icon"><i className="ti ti-search" aria-hidden="true"></i></span>
+              기사를 잘 읽었나요?
+            </div>
+          </div>
+          <div className="glossary-list">
+            <div className="glossary-item">
+              <div className="glossary-q-row">
+                <span className="glossary-hole"></span>
+                <div className="glossary-q"><span className="glossary-qmark">Q.</span> 수도요금이 오르는 이유는?</div>
+              </div>
+              <div className="glossary-a"><span className="glossary-amark">A.</span> 낡은 수도관을 고치기 위해서예요</div>
+            </div>
+            <div className="glossary-item">
+              <div className="glossary-q-row">
+                <span className="glossary-hole"></span>
+                <div className="glossary-q"><span className="glossary-qmark">Q.</span> 요금이 오르는 지역은 어디인가요?</div>
+              </div>
+              <div className="glossary-a"><span className="glossary-amark">A.</span> 수원, 창원, 용인, 여주 같은 곳이에요</div>
+            </div>
+            <div className="glossary-item">
+              <div className="glossary-q-row">
+                <span className="glossary-hole"></span>
+                <div className="glossary-q"><span className="glossary-qmark">Q.</span> 2024년에 전국 수도 사업이 잃은 돈은 얼마인가요?</div>
+              </div>
+              <div className="glossary-a"><span className="glossary-amark">A.</span> 2조3138억원이에요</div>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="art-footer">
         <span className="art-copyright">ⓒ 한경닷컴, 무단전재 및 재배포 금지</span>

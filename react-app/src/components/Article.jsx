@@ -186,10 +186,6 @@ export default function Article({ level, highlightColor, eraserActive }) {
         </div>
       )}
 
-      <div className="art-footer">
-        <span className="art-copyright">ⓒ 한경닷컴, 무단전재 및 재배포 금지</span>
-      </div>
-
       <div className="art-author-card">
         <div className="art-author-head">
           <div className="art-author-avatar"></div>

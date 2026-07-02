@@ -1,11 +1,19 @@
 // Epic AI 사이드바: 무료/유료 토글, 탭(AI 검증 대화 / 이해관계자 시각), 페이월.
 import { useRef, useState } from 'react';
+import { levels } from '../data/levels';
+
+// 이 기사에서 확인 가능한 프리미엄 인사이트 수(읽기 난이도와 무관하게 항상 동일한 고정값).
+// 원문(levels[0]) 기준 hk-stat 검증 수치 개수 + 이해관계자 시각 카드 수(3개)로 계산.
+// 현재 읽기 레벨의 본문을 기준으로 세면 쉽게읽기 모드일 때 수치가 급감해 버려,
+// "쉬운 읽기" 자체를 위축시키는 신호가 되므로 항상 원문 기준으로 고정한다.
+const INSIGHT_COUNT = (levels[0].body.match(/class="hk-stat"/g) || []).length + 3;
 
 export default function Sidebar({ level, onSubOpen, isPremium }) {
   const isPro = isPremium;
   const [tab, setTab] = useState('ai'); // 'ai' | 'stake'
   const [input, setInput] = useState('');
   const [flash, setFlash] = useState(false);
+  const [askCount, setAskCount] = useState(0);
   const flashTimerRef = useRef(null);
 
   const lockedStyle = isPro
@@ -15,7 +23,10 @@ export default function Sidebar({ level, onSubOpen, isPremium }) {
   function handleAsk() {
     if (!isPro) return;
     const v = input.trim();
-    if (v) alert('질문: ' + v);
+    if (v) {
+      alert('질문: ' + v);
+      setAskCount((n) => n + 1);
+    }
   }
 
   // 키보드로 입력을 모두 지운 순간(비어있지 않다가 → 비게 됨)에만 flash 효과.
@@ -70,10 +81,10 @@ export default function Sidebar({ level, onSubOpen, isPremium }) {
                 <button className="ask-btn" onClick={handleAsk}>질문</button>
               </div>
               <div className="sim-card">
-                <p className="sim-label"><i className="ti ti-chart-dots" aria-hidden="true"></i> 에픽 AI 종합 시뮬레이션 지수</p>
+                <p className="sim-label"><i className="ti ti-chart-dots" aria-hidden="true"></i> 구독 활용 현황</p>
                 <div className="sim-grid">
-                  <div className="sim-cell"><div className="sim-key">전국 상수도 현실화율</div><div className="sim-val danger">74.5%</div></div>
-                  <div className="sim-cell"><div className="sim-key">하수도 순손실 증가율</div><div className="sim-val danger">+7.6%</div></div>
+                  <div className="sim-cell"><div className="sim-key">AI 검증 대화 사용</div><div className="sim-val">{askCount}회</div></div>
+                  <div className="sim-cell"><div className="sim-key">이 기사 프리미엄 인사이트</div><div className="sim-val">{INSIGHT_COUNT}개</div></div>
                 </div>
               </div>
             </div>
@@ -82,7 +93,7 @@ export default function Sidebar({ level, onSubOpen, isPremium }) {
                 <div className="lock-gate">
                   <div className="lock-icon"><i className="ti ti-lock" aria-hidden="true"></i></div>
                   <p className="lock-title">유료 구독 전용 기능입니다</p>
-                  <p className="lock-desc">AI 검증 대화 및 종합 시뮬레이션 지수는<br />한경 프리미엄 구독자에게 제공됩니다.</p>
+                  <p className="lock-desc">AI 검증 대화 및 구독 활용 현황은<br />한경 프리미엄 구독자에게 제공됩니다.</p>
                   <button className="lock-cta" onClick={onSubOpen}><i className="ti ti-sparkles" aria-hidden="true" style={{ marginRight: 4, fontSize: 12 }}></i>유료 구독 신청 후 잠금해제 →</button>
                   <p className="lock-cta-note">7일 무료 체험 후 결제 · 언제든 해지 가능</p>
                 </div>

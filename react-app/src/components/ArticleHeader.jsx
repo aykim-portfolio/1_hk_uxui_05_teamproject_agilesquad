@@ -136,9 +136,6 @@ export default function ArticleHeader({
           >
             <path d="M20.9999 21.0001H12.8339M12.8339 21.0001H7.99994C7.73624 21.0007 7.47502 20.9491 7.23132 20.8484C6.98762 20.7476 6.76624 20.5997 6.57994 20.4131L2.58594 16.4141C2.211 16.039 2.00037 15.5304 2.00037 15.0001C2.00037 14.4697 2.211 13.9611 2.58594 13.5861L12.5859 3.58607C12.7717 3.40027 12.9922 3.25288 13.2349 3.15232C13.4776 3.05176 13.7377 3 14.0004 3C14.2632 3 14.5233 3.05176 14.766 3.15232C15.0087 3.25288 15.2292 3.40027 15.4149 3.58607L21.4139 9.58607C21.7889 9.96113 21.9995 10.4697 21.9995 11.0001C21.9995 11.5304 21.7889 12.039 21.4139 12.4141L12.8339 21.0001ZM5.08194 11.0901L13.9099 19.9181" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <i className="ti ti-letter-case" aria-hidden="true" aria-label="글자 크기"></i>
-          <i className="ti ti-share" aria-hidden="true" aria-label="공유"></i>
-          <i className="ti ti-printer" aria-hidden="true" aria-label="인쇄"></i>
         </div>
       </div>
     </div>

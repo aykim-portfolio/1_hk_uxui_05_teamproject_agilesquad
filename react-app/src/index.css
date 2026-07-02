@@ -123,7 +123,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 }
 .hk-trial-btn:hover { background: #0e2856; }
 .hk-trial-btn--hidden { visibility: hidden; pointer-events: none; }
-.hk-nav-menu { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex: 1; }
+.hk-nav-menu { display: flex; align-items: center; justify-content: center; gap: 26px; flex: 1; }
 .hk-nav-item { font-size: 15px; color: #333; cursor: pointer; text-decoration: none; white-space: nowrap; }
 .hk-nav-item.active { font-weight: 700; color: #191f28; }
 .hk-nav-item:hover { color: #3182f6; }

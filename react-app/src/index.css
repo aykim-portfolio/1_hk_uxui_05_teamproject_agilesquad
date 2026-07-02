@@ -123,7 +123,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 }
 .hk-trial-btn:hover { background: #0e2856; }
 .hk-trial-btn--hidden { visibility: hidden; pointer-events: none; }
-.hk-nav-menu { display: flex; align-items: center; gap: 22px; flex: 1; }
+.hk-nav-menu { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex: 1; }
 .hk-nav-item { font-size: 15px; color: #333; cursor: pointer; text-decoration: none; white-space: nowrap; }
 .hk-nav-item.active { font-weight: 700; color: #191f28; }
 .hk-nav-item:hover { color: #3182f6; }
@@ -137,9 +137,19 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
   padding: 8px 32px;
   display: flex;
   align-items: center;
-  gap: 22px;
   font-size: 12px;
-  overflow-x: auto;
+}
+.hk-ticker-track { flex: 1; min-width: 0; overflow: hidden; }
+.hk-ticker-track-inner {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  width: max-content;
+  animation: hk-ticker-scroll 22s linear infinite;
+}
+@keyframes hk-ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 .hk-tick { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .hk-tick-name { color: #4e5968; }
@@ -147,7 +157,7 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .hk-tick-chg { font-family: var(--font-num); font-weight: 500; display: flex; align-items: center; gap: 2px; }
 .hk-tick-chg.up { color: var(--up); }
 .hk-tick-chg.down { color: var(--down); }
-.hk-tick-fx { margin-left: auto; padding-left: 22px; border-left: 1px solid #e5e8eb; }
+.hk-tick-fx { flex-shrink: 0; margin-left: 22px; padding-left: 22px; border-left: 1px solid #e5e8eb; }
 
 /* ══════════════ 본문 레이아웃 ══════════════ */
 .page {

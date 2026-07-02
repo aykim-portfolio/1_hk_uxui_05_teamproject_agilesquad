@@ -62,16 +62,20 @@ export default function Header({ onSubOpen, isPremium }) {
       </nav>
 
       <div className="hk-ticker">
-        {tickers.map((t) => (
-          <div className="hk-tick" key={t.name}>
-            <span className="hk-tick-name">{t.name}</span>
-            <span className="hk-tick-val">{t.val}</span>
-            <span className={'hk-tick-chg ' + t.dir}>
-              {t.caret && <i className="ti ti-caret-down-filled" aria-hidden="true" style={{ fontSize: 10 }}></i>}
-              {t.chg}
-            </span>
+        <div className="hk-ticker-track">
+          <div className="hk-ticker-track-inner">
+            {[...tickers, ...tickers].map((t, i) => (
+              <div className="hk-tick" key={t.name + '-' + i}>
+                <span className="hk-tick-name">{t.name}</span>
+                <span className="hk-tick-val">{t.val}</span>
+                <span className={'hk-tick-chg ' + t.dir}>
+                  {t.caret && <i className="ti ti-caret-down-filled" aria-hidden="true" style={{ fontSize: 10 }}></i>}
+                  {t.chg}
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
         <div className="hk-tick hk-tick-fx">
           <span className="hk-tick-name">환율 USD/KRW</span>
           <span className="hk-tick-val">1,545.25</span>

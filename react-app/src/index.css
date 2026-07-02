@@ -402,10 +402,13 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .art-sidebar { grid-area: aside; padding: 28px 24px; background: #f9fafb; }
 .art-sidebar-sticky {
   position: sticky;
-  top: 20px;
-  max-height: calc(100vh - 40px);
+  top: 96px; /* 플로팅 검색바(.hk-float-search, 스크롤 시 fixed)에 가리지 않도록 오프셋 */
+  max-height: calc(100vh - 116px);
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge legacy */
 }
+.art-sidebar-sticky::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
 .panel-title { font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 0 0 4px; letter-spacing: -0.01em; }
 .panel-sub { font-size: 13px; color: var(--text-muted); margin: 0 0 20px; }
 .mode-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 10px 14px; background: #fff; border-radius: var(--radius); border: 0.5px solid var(--border); }
@@ -429,10 +432,16 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .chips { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
 .chip { padding: 10px 12px; background: #fff; border: 0.5px solid var(--border); border-radius: var(--radius); font-size: 12px; color: var(--text-secondary); cursor: pointer; text-align: left; font-family: var(--font-sans); }
 .chip:hover { border-color: var(--border-strong); color: var(--text-primary); }
-.input-row { display: flex; gap: 8px; margin-bottom: 16px; }
-.ai-input { flex: 1; padding: 9px 12px; background: #fff; border: 0.5px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--text-primary); font-family: var(--font-sans); }
+.input-row { display: flex; width: 100%; gap: 8px; margin-bottom: 16px; }
+.ai-input { flex: 1; min-width: 0; padding: 9px 12px; background: #fff; border: 0.5px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--text-primary); font-family: var(--font-sans); }
+.ai-input.flash { animation: ai-input-flash .35s ease; }
 .ask-btn { padding: 9px 16px; background: #3182f6; color: #fff; border: none; border-radius: var(--radius); font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; font-family: var(--font-sans); }
 .ask-btn:hover { background: #2163d2; }
+
+@keyframes ai-input-flash {
+  0% { background-color: #eef2ff; border-color: #6366f1; }
+  100% { background-color: #fff; border-color: var(--border); }
+}
 .sim-card { background: #fff; border-radius: var(--radius); border: 0.5px solid var(--border); padding: 14px 16px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
 .sim-label { font-size: 12px; color: var(--text-muted); margin: 0 0 12px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
 .sim-label i { color: #3182f6; }
@@ -445,11 +454,20 @@ body { font-family: var(--font-sans); background: #f2f4f6; color: var(--text-pri
 .stake-card { background: #fff; border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; border: 0.5px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
 .stake-label { font-size: 12px; font-weight: 700; color: var(--text-primary); margin: 0 0 6px; }
 .stake-body { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
-.stake-card.blur-card .stake-label,
-.stake-card.blur-card .stake-body { opacity: .28; user-select: none; pointer-events: none; }
 
 /* Paywall */
-.lock-gate { background: #fff; border: 0.5px solid var(--border); border-radius: 12px; padding: 22px 18px; margin-top: 6px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+.paywall-wrap { position: relative; }
+.paywall-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(249,250,251,.35) 0%, rgba(249,250,251,.95) 45%, #f9fafb 100%);
+}
+.lock-gate { width: 100%; background: #fff; border: 0.5px solid var(--border); border-radius: 12px; padding: 22px 18px; margin-top: 6px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
 .lock-icon { font-size: 28px; color: var(--text-muted); margin-bottom: 10px; }
 .lock-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin: 0 0 4px; }
 .lock-desc { font-size: 12px; color: var(--text-secondary); margin: 0 0 14px; line-height: 1.6; }

@@ -25,6 +25,12 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
 
   function handleClose() {
     setConfirmOpen(false);
+    if (success) {
+      // 결제 완료 후 닫는 경우(외부 클릭 / X버튼 / 확인 버튼) 모두 동일하게 구독을 확정한다.
+      onSubscribed?.();
+      setSelected(new Set());
+      setSuccess(null);
+    }
     onClose();
   }
 
@@ -39,13 +45,6 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
       `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
     const next = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
     setSuccess({ orderId, dateStr, items, final, next });
-  }
-
-  function handleReset() {
-    setSelected(new Set());
-    setSuccess(null);
-    onSubscribed?.();
-    handleClose();
   }
 
   if (!open) return null;
@@ -167,7 +166,7 @@ export default function SubscriptionModal({ open, onClose, onSubscribed }) {
                 <i className="ti ti-calendar" aria-hidden="true"></i> 다음 결제 예정일: {success.next.getFullYear()}년 {success.next.getMonth() + 1}월 {success.next.getDate()}일
               </div>
             </div>
-            <button className="sub-success-close" onClick={handleReset}>확인 후 기사로 돌아가기</button>
+            <button className="sub-success-close" onClick={handleClose}>확인 후 기사로 돌아가기</button>
           </div>
         )}
 

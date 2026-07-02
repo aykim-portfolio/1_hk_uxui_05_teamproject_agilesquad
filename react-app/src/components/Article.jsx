@@ -5,6 +5,19 @@ import { levels } from '../data/levels';
 import { initHkStatHighlight, attachHkStatDocHandler } from '../lib/hkStat';
 import { useFadeLevel } from '../lib/useFadeLevel';
 
+function hexToRgba(hex, alpha) {
+  const h = hex.replace('#', '');
+  const r = parseInt(h.substring(0, 2), 16);
+  const g = parseInt(h.substring(2, 4), 16);
+  const b = parseInt(h.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function highlighterCursor(color) {
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='26' viewBox='0 0 20 26'><polygon points='5,2 15,2 17,9 13,18 7,18 3,9' fill='${color}' stroke='#191f28' stroke-width='1.2' stroke-linejoin='round'/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 10 18, crosshair`;
+}
+
 function FigureImg({ level }) {
   return level === 2 ? (
     <img
@@ -23,7 +36,15 @@ function FigureImg({ level }) {
   );
 }
 
-export default function Article({ level, onSubOpen }) {
+function unwrapMark(mark) {
+  const parent = mark.parentNode;
+  if (!parent) return;
+  while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+  parent.removeChild(mark);
+  parent.normalize();
+}
+
+export default function Article({ level, onSubOpen, highlightColor, eraserActive }) {
   const bodyRef = useRef(null);
   const { currentLevel, prevLevel } = useFadeLevel(level);
 
@@ -42,6 +63,54 @@ export default function Article({ level, onSubOpen }) {
       ? '여러 동네에서 수도요금이 오르고 있어요 / 한국경제 자료사진'
       : '전국 지자체가 하반기부터 상하수도 요금을 줄줄이 인상한다. / 한국경제 자료사진';
 
+  // 지우개 모드: 드래그로 지나간(또는 클릭한) 형광펜 하이라이트를 제거.
+  function handleBodyMouseUpEraser() {
+    const body = bodyRef.current;
+    if (!body) return;
+    const selection = window.getSelection();
+    const marks = body.querySelectorAll('.hk-highlight-mark');
+    if (selection && selection.rangeCount > 0 && !selection.isCollapsed) {
+      const range = selection.getRangeAt(0);
+      if (body.contains(range.commonAncestorContainer)) {
+        marks.forEach((mark) => {
+          if (range.intersectsNode(mark)) unwrapMark(mark);
+        });
+      }
+      selection.removeAllRanges();
+    }
+  }
+
+  // 형광펜 모드: 드래그로 선택한 영역을 선택된 색상(20~30% 투명도)으로 밑줄/하이라이트 표시.
+  function handleBodyMouseUpHighlight() {
+    if (!highlightColor) return;
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return;
+    const range = selection.getRangeAt(0);
+    if (!bodyRef.current || !bodyRef.current.contains(range.commonAncestorContainer)) return;
+    const mark = document.createElement('mark');
+    mark.className = 'hk-highlight-mark';
+    mark.style.backgroundColor = hexToRgba(highlightColor, 0.25);
+    try {
+      range.surroundContents(mark);
+    } catch {
+      mark.appendChild(range.extractContents());
+      range.insertNode(mark);
+    }
+    selection.removeAllRanges();
+  }
+
+  function handleBodyMouseUp(e) {
+    if (eraserActive) {
+      handleBodyMouseUpEraser();
+      const clickedMark = e.target.closest && e.target.closest('.hk-highlight-mark');
+      if (clickedMark && bodyRef.current && bodyRef.current.contains(clickedMark)) {
+        unwrapMark(clickedMark);
+      }
+      return;
+    }
+    handleBodyMouseUpHighlight();
+  }
+
   return (
     <main className="art-main content">
       <div className="hk-crossfade">
@@ -57,6 +126,14 @@ export default function Article({ level, onSubOpen }) {
           key={'new-' + currentLevel}
           ref={bodyRef}
           className={'art-body hk-stat-scope hk-crossfade-new' + (currentLevel === 2 ? ' art-body--easy' : '')}
+          style={
+            eraserActive
+              ? { cursor: highlighterCursor('#FFFFFF') }
+              : highlightColor
+              ? { cursor: highlighterCursor(highlightColor) }
+              : undefined
+          }
+          onMouseUp={handleBodyMouseUp}
           dangerouslySetInnerHTML={{ __html: levels[currentLevel].body }}
         />
       </div>
